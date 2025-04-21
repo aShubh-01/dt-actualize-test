@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import 'remixicon/fonts/remixicon.css';
+
+
+*{
+  font-family: "Open Sans", sans-serif;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+h1,h2,h3,h4,h5,h6,button{
+  font-family: "Poppins", sans-serif;
+}
+
+.collage_section{
+    max-width: 1300px;
+}
+
+@media (max-width:768px){
+  .collage_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
+      width: auto;
+  }
+  .collage{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: auto;
+  }
+  .collage__left{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: auto;
+  }
+  .collage__left--top{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;        
+      gap: 16px;
+      width: 100%;
+      padding: 1rem;
+  }
+  .collage__left--bottom{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+      width:100% ;
+      padding: 1rem;
+  }
+  .small_img{
+      display: none;
+  }
+  .collage__right{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap:15px ;
+      width: 100%;
+      padding: 1rem;
+  }
+  .collage__right--top{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap:15px ;
+      width: 100% !important;
+  }
+  .large_img{
+      width: 100%;
+  }
+  .collage__right--bottom{
+      display: flex;        
+      flex-direction: column;
+      justify-content: center;
+      gap:15px ;
+      width: 100%;
+  }
+}
+
+@media (min-width:768px){
+  .collage_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+  .collage_heading{
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .collage{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 17px;
+  }
+  .collage__left{
+      display: flex;
+      flex-direction: column;
+      gap:15px ;
+  }
+  .collage__left--top{
+      display: flex;
+      flex-direction: column;
+      gap: 13.69px;
+  }
+  .collage__left--bottom{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 18px;
+  }
+  .collage__right{
+      display: flex;
+      flex-direction: column;
+      gap:15px ;
+  }
+  .collage__right--top{
+      display: flex;
+      flex-direction: column;
+      gap:15px ;
+  }
+  .collage__right--bottom{
+      display: flex;
+      flex-direction: row;
+      gap:16.41px ;
+      position: relative;
+      margin-left: -198px;
+  }
+}
+
+
