@@ -16,7 +16,7 @@ const Home = () => {
         <Eligible />
         <JD />
         <Rounds />
-        <Footer />
+        <Experience />
     </main>
   )
 }

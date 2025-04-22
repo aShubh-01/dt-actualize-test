@@ -4,10 +4,10 @@ import CriteriaCard from '../CriteriaCard'
 const Eligible = () => {
   return (
     <div
-      className="min-h-screen w-full flex flex-col md:flex-row justify-center items-center gap-6 bg-[url('/eligible_bg.jpg')] bg-cover bg-center p-4"
+      className="min-h-screen w-[100%] flex flex-col md:flex-row justify-center items-center gap-6 bg-[url('/eligible_bg.jpg')] bg-cover bg-center"
       id="eligible"
     >
-      <div className="max-w-[1340px] w-full flex flex-col md:flex-row gap-10 px-4">
+      <div className="max-w-[1300px] flex flex-col md:flex-row gap-10">
         {/* Left Section */}
         <div className="flex flex-col gap-6 md:gap-10 w-full md:w-[40%] mt-10 md:mt-20 items-start">
           <div className="w-full md:max-w-[30vw] flex flex-col gap-3">
@@ -22,7 +22,7 @@ const Eligible = () => {
               title="Try New Things"
               desc="You’re not afraid to try something new, even if it’s risky—because you know that’s how growth happens."
               oneLiner="50% of Gen Z exhibit risk-taking traits."
-              classes="bg-white w-full sm:min-w-[280px] sm:max-w-[340px] flex-1 cursor-pointer text-center flex flex-col gap-2 p-6 border-2 rounded-2xl border-gray-400 justify-center items-center md:ml-[12rem]"
+              classes="bg-white w-full sm:min-w-[280px] sm:max-w-[340px] flex-1 cursor-pointer text-center flex flex-col gap-2 p-6 border-2 rounded-2xl border-gray-300 justify-center items-center md:ml-[12rem]"
             />
           </div>
         </div>
@@ -35,14 +35,14 @@ const Eligible = () => {
               title="Learn It. Own It. Do It."
               desc="You don’t wait to be told—you self-initiate, explore, and complete what you begin."
               oneLiner="Only 27% finish what they start."
-              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-400 items-center justify-center"
+              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
             <CriteriaCard
               img="/challenges.svg"
               title="Challenges excite you"
               desc="You feel alive when you overcome challenges and build things that matter."
               oneLiner="60–65% seek achievement."
-              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-400 items-center justify-center"
+              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
           </div>
 
@@ -52,14 +52,14 @@ const Eligible = () => {
               title="Have a Growth Mindset"
               desc="You don’t doubt yourself—you just get curious. When something’s hard, your first thought is, “How do I figure this out?”"
               oneLiner="40% have a growth mindset; 30% are developing one."
-              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-400 items-center justify-center"
+              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
             <CriteriaCard
               img="/feedback.svg"
               title="Grow from Every Feedback"
               desc="You listen, reflect, and grow from every piece of feedback you receive."
               oneLiner="Only 40% of people apply feedback well."
-              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-400 items-center justify-center"
+              classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
           </div>
         </div>

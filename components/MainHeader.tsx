@@ -14,7 +14,7 @@ const MainHeader = () => {
           </span>
         </div>
 
-        <div className='hidden gap-5 md:flex'>
+        <div className='hidden gap-8 md:flex'>
           <a href="#explore">
             <span className='text-lg font-semibold cursor-pointer border-b-2 border-transparent hover:text-blue-700 hover:border-blue-700 transition duration-200'>Explore</span>
           </a>

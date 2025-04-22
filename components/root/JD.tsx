@@ -2,9 +2,9 @@ import React from 'react';
 
 const JD = () => {
   return (
-    <section className='flex flex-col lg:flex-row justify-between gap-10 md:gap-[27rem] max-w-[1300px]' id='JD'>
+    <section className='flex flex-col lg:flex-row justify-between gap-10 md:gap-[20rem] max-w-[1300px]' id='JD'>
       {/* Left content */}
-      <div className='flex flex-col gap-8 '>
+      <div className='flex flex-col gap-6 '>
         {/* Title and subtitle */}
         <div className='flex flex-col gap-1 bg-[#E8EFFEB2] rounded-[.5rem] p-3'>
           <h1 className='text-3xl md:text-3xl font-semibold'>Role: Software Development</h1>
@@ -40,7 +40,7 @@ const JD = () => {
         </div>
 
         {/* Compensation Details in Row on All Screens */}
-        <div className='flex gap-3 flex-row flex-wrap'>
+        <div className='flex gap-5 flex-row flex-wrap'>
           <span className='flex flex-col text-base md:text-lg'>
             <span className='font-medium'>First 6 months</span>
             <span>₹10,000/month</span>

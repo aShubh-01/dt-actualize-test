@@ -29,6 +29,14 @@ const Explore: React.FC = () => {
     };
   }, []);
 
+  const handleClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.classList.add("i-frame__visible");
+    }
+  };
+  
+
   // Generic function to postMessage to pause YouTube videos
   const pauseYouTubeVideo = (iframe: HTMLIFrameElement) => {
     iframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
