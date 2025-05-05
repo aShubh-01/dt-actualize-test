@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "set PORT=7050 && next start"
   },
   "author": "Iain Collins <me@iaincollins.com>",
   "contributors": [

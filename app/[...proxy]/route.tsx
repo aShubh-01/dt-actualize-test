@@ -14,19 +14,7 @@ function stripContentEncoding(result: Response) {
 }
 
 async function handler(request: NextRequest) {
-  const session = await auth()
 
-  const headers = new Headers(request.headers)
-  headers.set("Authorization", `Bearer ${session?.accessToken}`)
-
-  let backendUrl =
-    process.env.THIRD_PARTY_API_EXAMPLE_BACKEND ??
-    "https://third-party-backend.authjs.dev"
-
-  let url = request.nextUrl.href.replace(request.nextUrl.origin, backendUrl)
-  let result = await fetch(url, { headers, body: request.body })
-
-  return stripContentEncoding(result)
 }
 
 export const dynamic = "force-dynamic"
