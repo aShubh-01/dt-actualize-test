@@ -1,3 +1,8 @@
-/** @type {import("next").NextConfig} */
-module.exports = {
-}
+// next.config.js
+const nextConfig = {
+    basePath: '/dt-actualize',
+    assetPrefix: '/dt-actualize',
+  };
+  
+  module.exports = nextConfig;
+  
