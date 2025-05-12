@@ -58,7 +58,7 @@ const JD = () => {
 
       {/* JD Image */}
       <div className='flex justify-center items-center'>
-        <img src="/JD.png" alt="JD" className='w-full max-w-sm md:max-w-md lg:max-w-md' />
+        <img src="JD.png" alt="JD" className='w-full max-w-sm md:max-w-md lg:max-w-md' />
       </div>
     </section>
   );

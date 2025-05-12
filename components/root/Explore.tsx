@@ -148,7 +148,7 @@ const Explore: React.FC = () => {
   const carouselItems = [
     {
       id: "curiosity-compass",
-      content: <img src="/curiosity_compass.svg" alt="curiosity compass" className="w-full" />
+      content: <img src="curiosity_compass.svg" alt="curiosity compass" className="w-full" />
     },
     {
       id: "ldi-video",
@@ -156,7 +156,7 @@ const Explore: React.FC = () => {
         <div className="relative w-full">
           <img 
             id="LDI" 
-            src="/ldi.svg" 
+            src="ldi.svg" 
             alt="LDI" 
             ref={ldiRef} 
             style={{ cursor: 'pointer' }} 
@@ -180,11 +180,11 @@ const Explore: React.FC = () => {
     },
     {
       id: "leadership-journey",
-      content: <img src="/leadership journey.svg" alt="Leadership Journey" className="w-full" />
+      content: <img src="leadership journey.svg" alt="Leadership Journey" className="w-full" />
     },
     {
       id: "ubs",
-      content: <img src="/ubs.svg" alt="UBS" className="w-full" />
+      content: <img src="ubs.svg" alt="UBS" className="w-full" />
     },
     {
       id: "sd-video",
@@ -193,7 +193,7 @@ const Explore: React.FC = () => {
           <img 
             className="w-full" 
             id="SD" 
-            src="/SD.svg" 
+            src="SD.svg" 
             alt="SD" 
             ref={sdRef} 
             style={{ cursor: 'pointer' }} 
@@ -221,7 +221,7 @@ const Explore: React.FC = () => {
           <img 
             className="w-full"
             id="tarun" 
-            src="/tarun1.svg" 
+            src="tarun1.svg" 
             alt="Tarun Video" 
             ref={tarunRef} 
             style={{ cursor: 'pointer' }} 
@@ -244,7 +244,7 @@ const Explore: React.FC = () => {
     },
     {
       id: "workshop",
-      content: <img src="/workshop.svg" alt="Workshop" className="w-full" />
+      content: <img src="workshop.svg" alt="Workshop" className="w-full" />
     }
   ];
 
@@ -295,10 +295,10 @@ const Explore: React.FC = () => {
     <div className="collage">
       <div className="collage__left">
         <div className="collage__left--top">
-          <img src="/curiosity_compass.svg" alt="curiosity compass" />
+          <img src="curiosity_compass.svg" alt="curiosity compass" />
           <img 
             id="LDI" 
-            src="/ldi.svg" 
+            src="ldi.svg" 
             alt="LDI" 
             ref={ldiRef} 
             style={{ cursor: 'pointer' }} 
@@ -318,17 +318,17 @@ const Explore: React.FC = () => {
           ></iframe>
         </div>
         <div className="collage__left--bottom">
-          <img src="/leadership journey.svg" alt="Leadership Journey" />
-          <img className="small_img" src="/small_img.svg" alt="Small image" />
+          <img src="leadership journey.svg" alt="Leadership Journey" />
+          <img className="small_img" src="small_img.svg" alt="Small image" />
         </div>
       </div>
       <div className="collage__right">
         <div className="collage__right--top">
-          <img src="/ubs.svg" alt="UBS" />
+          <img src="ubs.svg" alt="UBS" />
           <img 
             className="large_img" 
             id="SD" 
-            src="/SD.svg" 
+            src="SD.svg" 
             alt="SD" 
             ref={sdRef} 
             style={{ cursor: 'pointer' }} 
@@ -350,7 +350,7 @@ const Explore: React.FC = () => {
         <div className="collage__right--bottom">
           <img 
             id="tarun" 
-            src="/tarun1.svg" 
+            src="tarun1.svg" 
             alt="Tarun Video" 
             ref={tarunRef} 
             style={{ cursor: 'pointer' }} 
@@ -368,7 +368,7 @@ const Explore: React.FC = () => {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-          <img src="/workshop.svg" alt="Workshop" />
+          <img src="workshop.svg" alt="Workshop" />
         </div>
       </div>
     </div>

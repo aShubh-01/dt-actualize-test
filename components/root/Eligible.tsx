@@ -18,7 +18,7 @@ const Eligible = () => {
           </div>
           <div className="w-full md:w-auto">
             <CriteriaCard
-              img="/new_things.svg"
+              img="new_things.svg"
               title="Try New Things"
               desc="You’re not afraid to try something new, even if it’s risky—because you know that’s how growth happens."
               oneLiner="50% of Gen Z exhibit risk-taking traits."
@@ -31,14 +31,14 @@ const Eligible = () => {
         <div className="flex flex-wrap justify-center gap-6 w-full md:w-[60%]">
           <div className="flex flex-col gap-8 w-full sm:w-auto md:mt-[7rem]">
             <CriteriaCard
-              img="/learn.svg"
+              img="learn.svg"
               title="Learn It. Own It. Do It."
               desc="You don’t wait to be told—you self-initiate, explore, and complete what you begin."
               oneLiner="Only 27% finish what they start."
               classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
             <CriteriaCard
-              img="/challenges.svg"
+              img="challenges.svg"
               title="Challenges excite you"
               desc="You feel alive when you overcome challenges and build things that matter."
               oneLiner="60–65% seek achievement."
@@ -48,14 +48,14 @@ const Eligible = () => {
 
           <div className="flex flex-col gap-8 w-full sm:w-auto">
             <CriteriaCard
-              img="/growth_mindset.svg"
+              img="growth_mindset.svg"
               title="Have a Growth Mindset"
               desc="You don’t doubt yourself—you just get curious. When something’s hard, your first thought is, “How do I figure this out?”"
               oneLiner="40% have a growth mindset; 30% are developing one."
               classes="w-full sm:min-w-[280px] sm:max-w-[340px] bg-white cursor-pointer text-center flex flex-col gap-3 p-6 border-2 rounded-2xl border-gray-300 items-center justify-center"
             />
             <CriteriaCard
-              img="/feedback.svg"
+              img="feedback.svg"
               title="Grow from Every Feedback"
               desc="You listen, reflect, and grow from every piece of feedback you receive."
               oneLiner="Only 40% of people apply feedback well."

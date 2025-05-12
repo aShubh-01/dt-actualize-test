@@ -17,7 +17,7 @@ const Rounds = () => {
               </div>
             </div>
             <div className='hidden md:flex items-center justify-end mt-8 ml-4'>
-              <img src="/arrow_1.png" alt="Arrow" className="rotate-180 scale-x-[-1]" />
+              <img src="arrow_1.png" alt="Arrow" className="rotate-180 scale-x-[-1]" />
             </div>
           </div>
 
@@ -25,7 +25,7 @@ const Rounds = () => {
           <div className='p-4 md:p-6 lg:pb-0 md:ml-4 w-full flex flex-col md:flex-row md:justify-end'>
             <div className='max-w-full md:max-w-[60vw] flex flex-col md:flex-row'>
               <div className='hidden md:flex items-center mt-8 mr-4'>
-                <img src="/arrow_1.png" alt="Arrow" className="rotate-180" />
+                <img src="arrow_1.png" alt="Arrow" className="rotate-180" />
               </div>
               <div className='flex flex-col md:flex-row gap-3 md:gap-5'>
                 <span className='bg-[#000B47] text-white h-auto md:h-10 p-2 px-4 rounded-[.5rem] text-center md:text-left md:self-start whitespace-nowrap'>Round 2</span>
@@ -47,7 +47,7 @@ const Rounds = () => {
               </div>
             </div>
             <div className='hidden md:flex items-center justify-end mt-8 ml-4'>
-              <img src="/arrow_1.png" alt="Arrow" className="rotate-180 scale-x-[-1]" />
+              <img src="arrow_1.png" alt="Arrow" className="rotate-180 scale-x-[-1]" />
             </div>
           </div>
 

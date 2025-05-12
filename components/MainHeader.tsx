@@ -9,7 +9,7 @@ const MainHeader = () => {
         <div className="flex gap-4 items-center">
           <span>
             <Link href="/">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+              <img src="logo.svg" alt="Logo" className="h-8 w-auto" />
             </Link>
           </span>
         </div>

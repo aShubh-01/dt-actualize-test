@@ -35,15 +35,15 @@ const Herodiv = () => {
       {/* Stats Cards */}
       <div className="flex flex-col md:flex-row gap-4 md:gap-8 justify-between px-0 md:px-12">
         <div className="flex flex-col items-center rounded-[.5rem] p-6 md:p-7 w-full gap-3 md:w-[25vw] bg-[#E7EFFFEA]">
-          <span className="text-3xl md:text-4xl font-bold text-[#0029FF]">6900</span>
+          <span className="text-3xl md:text-4xl font-bold text-[#0029FF]">4123</span>
           <span className="text-base md:text-lg text-[#000000B2] tracking-wider">Total Applicants</span>
         </div>
         <div className="flex flex-col items-center rounded-[.5rem] p-6 md:p-7 w-full gap-3 md:w-[25vw] bg-[#E7EFFFEA]">
-          <span className="text-3xl md:text-4xl font-bold text-[#0029FF]">6900</span>
+          <span className="text-3xl md:text-4xl font-bold text-[#0029FF]">647</span>
           <span className="text-base md:text-lg text-[#000000B2] tracking-wider">Completed All Rounds</span>
         </div>
         <div className="flex flex-col items-center rounded-[.5rem] p-6 md:p-7 w-full gap-3 md:w-[25vw] bg-[#E7EFFFEA]">
-          <span className="text-3xl md:text-4xl font-bold text-blue-700">6900</span>
+          <span className="text-3xl md:text-4xl font-bold text-blue-700">39</span>
           <span className="text-base md:text-lg text-[#000000B2] tracking-wider">Applicants Shortlisted</span>
         </div>
       </div>

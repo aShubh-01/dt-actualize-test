@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <main className="flex justify-between p-5">
       <section>
-        <img src="/logo.svg" alt="" />
+        <img src="logo.svg" alt="" />
       </section>
       <section className="font-semibold">{`All The Best ${name}!`}</section>
     </main>
