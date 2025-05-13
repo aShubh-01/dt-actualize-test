@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-gray-900 h-[50vh] lg:min-w-[1600px] text-white">
+    <footer className="footer bg-gray-900 h-[50vh] lg:min-w-[90vw] text-white">
       <div className="flex flex-col justify-between h-full container mx-auto px-6">
         <div className="footer-content mt-[2rem] flex flex-col md:flex-row justify-between">
           {/* Brand Section */}

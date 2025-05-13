@@ -18,7 +18,7 @@ const Explore: React.FC = () => {
   // Check if we're on mobile
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     
     checkIsMobile();
@@ -375,7 +375,7 @@ const Explore: React.FC = () => {
   );
 
   return (
-    <div className="collage_container">
+    <div className="collage_container" id='explore'>
       <h2 className="collage_heading text-center md:text-left px-4 md:px-0">Explore DT Valley</h2>
       {isMobile ? <MobileView /> : <DesktopView />}
     </div>

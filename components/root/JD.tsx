@@ -4,7 +4,7 @@ const JD = () => {
   return (
     <section className='flex flex-col lg:flex-row justify-between gap-10 md:gap-[20rem] max-w-[1300px]' id='JD'>
       {/* Left content */}
-      <div className='flex flex-col gap-6 '>
+      <div className='flex flex-col gap-6 mr-5 ml-5'>
         {/* Title and subtitle */}
         <div className='flex flex-col gap-1 bg-[#E8EFFEB2] rounded-[.5rem] p-3'>
           <h1 className='text-3xl md:text-3xl font-semibold'>Role: Software Development</h1>
