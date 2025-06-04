@@ -1,13 +1,25 @@
-import MainHeader from '@/components/MainHeader'
-import React from 'react'
+import type { Metadata } from "next";
+import { Providers } from "../providers/Providers";
+import MainHeader from "@/components/MainHeader";
 
-const layout = ({children}: Readonly<{children: React.ReactNode}>) => {
+export const metadata: Metadata = {
+  title: "Actualize | DeepThought",
+  description: "DeepThought Selection Process",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <>
-    <MainHeader />
-    <main>{children}</main>
-    </>
-  )
+    <html lang="en">
+      <body>
+        <Providers>
+          <MainHeader />
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
 }
-
-export default layout

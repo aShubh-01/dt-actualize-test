@@ -11,6 +11,7 @@ import React from 'react'
 const Home = () => {
   return (
     <main className='flex flex-col gap-16 items-center'>
+      
         <HeroSection />
         <Explore />
         <Eligible />

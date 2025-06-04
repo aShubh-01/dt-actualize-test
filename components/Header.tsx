@@ -7,7 +7,7 @@ const Header = () => {
       <section>
         <img src="logo.svg" alt="" />
       </section>
-      <section className="font-semibold">{`All The Best ${name}!`}</section>
+      {/* <section className="font-semibold">{`All The Best ${name}!`}</section> */}
     </main>
   );
 };

@@ -1,4 +1,5 @@
 "use client"
+
 import TimelineModal from "@/components/TimerModal"
 
 const page = () => {

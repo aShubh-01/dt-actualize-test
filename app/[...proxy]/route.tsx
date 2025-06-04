@@ -14,7 +14,7 @@ function stripContentEncoding(result: Response) {
 }
 
 async function handler(request: NextRequest) {
-
+return new Response("Page not found", { status: 501 })
 }
 
 export const dynamic = "force-dynamic"
