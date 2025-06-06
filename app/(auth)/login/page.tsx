@@ -1,21 +1,75 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const LoginButton = dynamic(() => import("@/components/LoginButton"), { ssr: false });
+const RoleSelector = dynamic(() => import("@/components/RoleSelector"), { ssr: false });
 
-export default function HomePage() {
+interface Role {
+  roleId: string;
+  roleTitle: string;
+}
+
+export default function LoginPage() {
+  const { data: session, status } = useSession();
+  const [roles, setRoles] = useState<Role[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      const fetchRoles = async () => {
+        try {
+          const response = await axios({
+            url: "/api/v1/round/1/roles",
+            method: "GET",
+            headers: {
+              'Content-Type': "application/json"
+            }
+          });
+
+          if(response.status != 200) return;
+          
+          const formattedRoles = response.data.roles.map((role : any) => {
+            return { roleId: role._id, roleTitle: role.roleTitle }
+          })
+
+          setRoles(formattedRoles || []);
+        } catch (error) {
+          console.error("Failed to fetch roles", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchRoles();
+    } else {
+      setLoading(false);
+    }
+  }, [status]);
+
   return (
-      <main className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-white px-4">
-        <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-sm text-center space-y-6 border border-gray-200">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800">Welcome to Actualize</h1>
-            <p className="text-sm text-gray-500">Please log in to continue</p>
-          </div>
-          <div className='flex justify-center'>
+    <main className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-white px-4">
+      <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-md text-center space-y-6 border border-gray-200">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">Welcome to DeepThought Actualize</h1>
+          <p className="text-sm text-gray-500">
+            {status === "authenticated" ? "Select your role to get started" : "Please log in to continue"}
+          </p>
+        </div>
+
+        {status === "loading" || loading ? (
+          <p className="text-gray-500 animate-pulse">Loading...</p>
+        ) : status === "authenticated" ? (
+          <RoleSelector uid={session?.user?.uid} roles={roles} />
+        ) : (
+          <div className="flex justify-center">
             <LoginButton />
           </div>
-        </div>
-      </main>
+        )}
+      </div>
+    </main>
   );
 }
