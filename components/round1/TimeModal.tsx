@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useToast } from "@/components/Toast";
 
 interface TimerModalProps {
   isOpen: boolean;
@@ -7,8 +8,10 @@ interface TimerModalProps {
 
 const TimerModal: React.FC<TimerModalProps> = ({ isOpen, onTimelineSet }) => {
   const [customHours, setCustomHours] = useState<number>(24);
+    const { showToast } = useToast();
 
   const handleSetTimeline = () => {
+    showToast('success', 'Round 1 Started!', 3000);
     onTimelineSet(customHours);
   };
 
@@ -39,7 +42,7 @@ const TimerModal: React.FC<TimerModalProps> = ({ isOpen, onTimelineSet }) => {
       <div className="bg-white rounded-3xl p-8 shadow-2xl max-w-md w-full text-center space-y-8 border border-gray-100">
         {/* Header */}
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-gray-900">Set Your Timeline</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Self-Defined Timeline</h2>
           <p className="text-gray-500 text-sm">Choose how long you need for this challenge</p>
         </div>
         
