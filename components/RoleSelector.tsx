@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "./Toast";
 import axios from 'axios';
 
 type Role = {
@@ -20,6 +21,7 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
+  const { showToast } = useToast();
 
   if(!session) return <div>Not logged in</div> // add a page to show not logged in
 
@@ -41,7 +43,7 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
 
   const initiateRound1 = async (userId: string, roleId: string) => {
     const response = await axios({
-      url: '/api/v1/round/1/initiate',
+      url: '/api/v1/round/1/attempt',
       method: 'POST',
       headers: {
         'Content-Type': "application/json"
@@ -51,7 +53,10 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
       }
     });
 
-    if(response.status != 200) return false; // add notification toasts to show whether APIs have failed or succeeded
+    if(response.status != 200) {
+      showToast('error', 'Failed to Initiate Round 1', 3000);
+      return false
+    };
     return response.data.attemptId;
   };
 
@@ -59,11 +64,12 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
     if (!selectedRole || isLoading) return;
 
     setIsLoading(true);
+    showToast('loading', 'Initiating Round 1', 3000);
 
     try {
+      
       await updateUserStatus(session.user.uid, 'ROUND_1')
       const initiateRound1Id = await initiateRound1(session.user.uid, selectedRole.roleId);
-
       router.push(`/round/1?id=${initiateRound1Id}`);
     } catch (error) {
       console.error('Error starting round:', error);
