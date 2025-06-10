@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import QuestionCard, { QuestionData } from '@/components/round1/QuestionCard';
 import TimerModal from '@/components/round1/TimeModal';
 import FeedbackModal from '@/components/round1/FeedbackModal';
@@ -14,13 +14,14 @@ import { useRouter } from 'next/navigation';
 import { useStorage } from '@/lib/hooks/useStorage';
 import axios from 'axios';
 
-const Round1Page: React.FC = () => {
+// Separate component that uses useSearchParams
+const Round1Content: React.FC = () => {
   const { showToast } = useToast();
   const { data: session, status } = useSession();
   const { getStorageItem, setStorageItem, removeStorageItem } = useStorage();
-  const attemptId = useSearchParams().get('id');
+  const attemptId = useSearchParams().get('id'); // This is now inside Suspense boundary
   const router = useRouter();
-  
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +46,7 @@ const Round1Page: React.FC = () => {
   // Check timeline and submission status
   useEffect(() => {
     if (getStorageItem('isSubmitted', false)) return;
-    
+
     const savedTimeline = getStorageItem('selfDefinedTimeline');
     if (savedTimeline) {
       const savedDeadline = new Date(savedTimeline);
@@ -80,10 +81,10 @@ const Round1Page: React.FC = () => {
   // Load saved data
   useEffect(() => {
     if (!attemptId) return;
-    
+
     const savedAnswers = getStorageItem(`answers_${attemptId}`, {});
     const savedQuestionIndex = parseInt(localStorage.getItem(`currentQuestion_${attemptId}`) || '0', 10);
-    
+
     setAnswers(savedAnswers);
     if (!isNaN(savedQuestionIndex) && savedQuestionIndex >= 0) {
       setCurrentQuestionIndex(savedQuestionIndex);
@@ -124,11 +125,11 @@ const Round1Page: React.FC = () => {
 
     try {
       if (attemptId) {
-        const response = await axios.put(`/api/v1/round/1/attempt?id=${attemptId}`, 
+        const response = await axios.put(`/api/v1/round/1/attempt?id=${attemptId}`,
           { selfDefinedTimeline: endTimelineDate },
           { headers: { 'Content-Type': "application/json" } }
         );
-        
+
         response.status === 200 ? setIsModalOpen(false) : showToast("error", "Unable to Set Timeline", 3000);
       }
     } catch (error) {
@@ -137,8 +138,8 @@ const Round1Page: React.FC = () => {
   };
 
   const handleNext = () => {
-    currentQuestionIndex < questionsData.length - 1 
-      ? setCurrentQuestionIndex(prev => prev + 1) 
+    currentQuestionIndex < questionsData.length - 1
+      ? setCurrentQuestionIndex(prev => prev + 1)
       : handleSubmit();
   };
 
@@ -151,7 +152,7 @@ const Round1Page: React.FC = () => {
     showToast('loading', "Submitting Answers...", 5000);
 
     try {
-      const response = await axios.post(`/api/v1/round/1/answers?id=${attemptId}`, 
+      const response = await axios.post(`/api/v1/round/1/answers?id=${attemptId}`,
         { userId, answers },
         { headers: { 'Content-Type': "application/json" } }
       );
@@ -177,22 +178,22 @@ const Round1Page: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
       <TimerModal isOpen={isModalOpen} onTimelineSet={handleTimelineSet} />
-      <FeedbackModal 
-        isOpen={isSubmitted} 
+      <FeedbackModal
+        isOpen={isSubmitted}
         feedback={aiFeedback as any}
-        onExploreMore={() => { 
-          cleanUp(); 
+        onExploreMore={() => {
+          cleanUp();
           //router.push('/round/1/role-gallery')
-        }} 
+        }}
         onLockIn={() => {
           cleanUp();
-        }} 
+        }}
       />
 
       <div className="bg-white p-8 rounded-2xl shadow-md max-w-4xl w-full space-y-6 relative">
         {!isModalOpen && questionsData.length > 0 && (
           <>
-            <ProgressBar 
+            <ProgressBar
               questionsData={questionsData}
               currentQuestionIndex={currentQuestionIndex}
               deadline={deadline}
@@ -214,6 +215,15 @@ const Round1Page: React.FC = () => {
         )}
       </div>
     </div>
+  );
+};
+
+// Main page component with Suspense boundary
+const Round1Page: React.FC = () => {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <Round1Content />
+    </Suspense>
   );
 };
 
