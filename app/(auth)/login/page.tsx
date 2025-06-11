@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useToast } from "@/components/Toast";
 import axios from "axios";
 
 const LoginButton = dynamic(() => import("@/components/LoginButton"), { ssr: false });
@@ -15,11 +16,13 @@ interface Role {
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
+  const { showToast } = useToast();
   const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (status === "authenticated") {
+      showToast('success', 'Logged in', 3000); // show a toast notification.
       const fetchRoles = async () => {
         try {
           const response = await axios({
@@ -38,6 +41,7 @@ export default function LoginPage() {
 
           setRoles(formattedRoles || []);
         } catch (error) {
+          showToast('error', 'Unable to fetch roles', 3000);
           console.error("Failed to fetch roles", error);
         } finally {
           setLoading(false);
