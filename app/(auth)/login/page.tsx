@@ -41,6 +41,7 @@ export default function LoginPage() {
 
           setRoles(formattedRoles || []);
         } catch (error) {
+          showToast('error', 'Unable to fetch roles', 3000);
           console.error("Failed to fetch roles", error);
         } finally {
           setLoading(false);
