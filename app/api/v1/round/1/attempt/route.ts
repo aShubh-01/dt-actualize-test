@@ -82,6 +82,17 @@ export async function POST(req: NextRequest) {
             updatedAt: currentDate
         });
 
+        await db.collection("users").updateOne(
+            { userId: toObjectId(userId) },
+            { 
+                $set: {
+                    currentRoleId: toObjectId(roleId),
+                    updatedAt: new Date()
+                }
+            },
+            { upsert: true }
+        )
+
         return NextResponse.json({
             attemptId: initiatedRound.insertedId,
             message: "Round 1 Initiated"
@@ -111,7 +122,7 @@ export async function PUT(req: NextRequest) {
 
         const { db } = await connectDatabase();
         await db.collection("round1_attempts").updateOne({
-            _id: new ObjectId(attemptId as any)
+            _id: toObjectId(attemptId)
         },{ 
             $set: data
         });
