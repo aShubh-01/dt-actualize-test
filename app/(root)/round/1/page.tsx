@@ -13,6 +13,7 @@ import { useToast } from '@/components/Toast';
 import { useRouter } from 'next/navigation';
 import { useStorage } from '@/lib/hooks/useStorage';
 import axios from 'axios';
+import { updateUserStatus } from '@/lib/apiUtil';
 
 // Separate component that uses useSearchParams
 const Round1Content: React.FC = () => {
@@ -149,7 +150,7 @@ const Round1Content: React.FC = () => {
 
   const handleSubmit = async () => {
     const userId = status === 'authenticated' && session ? session.user.uid : undefined;
-    showToast('loading', "Submitting Answers...", 5000);
+    showToast('loading', "Submitting Answers...", 3000);
 
     try {
       const response = await axios.post(`/api/v1/round/1/answers?id=${attemptId}`,
@@ -186,7 +187,13 @@ const Round1Content: React.FC = () => {
           //router.push('/round/1/role-gallery')
         }}
         onLockIn={() => {
+          if(!session) {
+            showToast('error', 'Session Not Found', 3000);
+            return
+          }
           cleanUp();
+          updateUserStatus(session?.user.uid, 'MANIFESTO');
+          router.push(`/round/1/manifesto`)
         }}
       />
 

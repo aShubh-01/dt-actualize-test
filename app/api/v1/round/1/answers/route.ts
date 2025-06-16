@@ -29,10 +29,6 @@ export async function POST(req: NextRequest) {
         const { db } = await connectDatabase();
         await db.collection("round1_answers").insertMany(formattedAnswers)
 
-        //Call AI model api to geneate feedback for the answers
-        const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms * 1000));
-        await delay(5);
-
         return NextResponse.json(
             { message: "Answers Submitted!"}, 
             {status: 200}
