@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { connectDatabase } from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
+import { toObjectId } from "@/lib/utils";
 
 export async function PUT(req: NextRequest) {
     try {
@@ -25,7 +26,7 @@ export async function PUT(req: NextRequest) {
         // add a check for validating user id format (ObjectId)
 
         await db.collection("users").updateOne(
-            { _id: new ObjectId(userId) },
+            { _id: toObjectId(userId) },
             { 
                 $set: {
                     status: newStatus,

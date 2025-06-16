@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
         });
 
         await db.collection("users").updateOne(
-            { userId: toObjectId(userId) },
+            { _id: toObjectId(userId) },
             { 
                 $set: {
                     currentRoleId: toObjectId(roleId),
