@@ -6,6 +6,7 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api')) {
     // Skip auth check for NextAuth routes and public endpoints
     const publicRoutes = [
+      '/api',
       '/api/auth',
       '/api/health',
       '/api/public'

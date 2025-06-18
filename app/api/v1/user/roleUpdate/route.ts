@@ -5,7 +5,7 @@ import { toObjectId } from "@/lib/utils";
 
 export async function PUT(req: NextRequest) {
     try {
-        const { userId, newStatus } = await req.json();
+        const { userId, currentRoleId } = await req.json();
 
         if (!userId) {
             return NextResponse.json(
@@ -14,9 +14,9 @@ export async function PUT(req: NextRequest) {
             )
         }
 
-        if (!newStatus) {
+        if (!currentRoleId) {
             return NextResponse.json(
-                { error: 'New status is required' },
+                { error: 'roleId is required' },
                 { status: 400 }
             )
         }
@@ -29,21 +29,21 @@ export async function PUT(req: NextRequest) {
             { _id: toObjectId(userId) },
             { 
                 $set: {
-                    status: newStatus,
+                    currentRoleId: toObjectId(currentRoleId),
                     updatedAt: new Date()
                 } 
-            }
+            },
+            { upsert: true }
         )
 
         return NextResponse.json({
-            currentStatus: newStatus,
-            message: "Updated user status",
+            message: "Updated user's current role",
         }, { status: 200 })
 
     } catch (err) {
-        console.error('Error while updating user status', err)
+        console.error("Error while updating user's role", err)
         return NextResponse.json({
-            error: "Unable to update user status"
+            error: "Unable to update user's role"
         }, { status: 500 })
     }
 }
