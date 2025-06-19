@@ -3,6 +3,8 @@ import React from 'react';
 interface NavigationButtonsProps {
   currentQuestionIndex: number;
   totalQuestions: number;
+  isSubmitted: boolean;
+  setIsSubmitted: (value: boolean) => void
   onBack: () => void;
   onNext: () => void;
 }
@@ -10,6 +12,8 @@ interface NavigationButtonsProps {
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   currentQuestionIndex,
   totalQuestions,
+  isSubmitted,
+  setIsSubmitted,
   onBack,
   onNext
 }) => (
@@ -23,6 +27,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
     </button>
     <button
       onClick={onNext}
+      disabled={isSubmitted}
       className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold transition-all duration-200 shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/30 hover:scale-[1.02]"
     >
       {currentQuestionIndex === totalQuestions - 1 ? 'Submit' : 'Next'}
