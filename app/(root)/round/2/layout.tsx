@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '@/components/Header';
+import Sidebar from '@/components/round2/Sidebar';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -7,8 +8,8 @@ interface PageLayoutProps {
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
-    <div>
-        <div>header</div>
+    <div className='flex'>
+        <Sidebar />
         {children}
     </div>
   );
