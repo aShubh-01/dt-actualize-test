@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { useToast } from "@/components/Toast";
 import axios from "axios";
 
-const LoginButton = dynamic(() => import("@/components/LoginButton"), { ssr: false });
-const RoleSelector = dynamic(() => import("@/components/RoleSelector"), { ssr: false });
+const LoginButton = dynamic(() => import("@/components/login/LoginButton"), { ssr: false });
+const RoleSelector = dynamic(() => import("@/components/login/RoleSelector"), { ssr: false });
 
 interface Role {
   roleId: string;

@@ -215,6 +215,8 @@ const Round1Content: React.FC = () => {
             <NavigationButtons
               currentQuestionIndex={currentQuestionIndex}
               totalQuestions={questionsData.length}
+              isSubmitted={isSubmitted}
+              setIsSubmitted={setIsSubmitted}
               onBack={handleBack}
               onNext={handleNext}
             />
