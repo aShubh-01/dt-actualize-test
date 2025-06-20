@@ -184,7 +184,7 @@ const Round1Content: React.FC = () => {
         feedback={aiFeedback as any}
         onExploreMore={() => {
           cleanUp();
-          //router.push('/round/1/role-gallery')
+          router.push('/round/1/role-gallery')
         }}
         onLockIn={() => {
           if(!session) {
