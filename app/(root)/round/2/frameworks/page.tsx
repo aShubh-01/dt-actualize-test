@@ -5,14 +5,13 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 
 interface FrameworkItem {
-  id?: string;
-  _id?: string;
   title: string;
   description: string;
   image: string;
   alt: string;
   bgColor?: string;
   gridClass?: string;
+  round:number;
 }
 
 // ✅ Server-side data fetching (App Router)

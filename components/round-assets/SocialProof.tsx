@@ -4,56 +4,56 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Testimonials } from '@/components/round2/social-proof/Testimonials';
-
-interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  quote: string;
-  avatar: string;
-  bgColor: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 'jhansi',
-    name: 'Jhansi',
-    role: 'Product Manager at Fintech',
-    quote: "I realized data isn't about showing intelligence. It's about unlocking action.",
-    avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    id: 'soubhik',
-    name: 'Soubhik',
-    role: 'Engineering Lead at SaaS',
-    quote: 'I submitted too early. Reading it again, I saw my logic had gaps. But fixing that gave me my biggest growth.',
-    avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg',
-    bgColor: 'bg-green-50',
-  },
-  {
-    id: 'omkar',
-    name: 'Omkar',
-    role: 'Data Scientist at Healthcare',
-    quote: 'The hardest part wasn’t the framework. It was explaining it clearly enough for a non-tech founder to act.',
-    avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg',
-    bgColor: 'bg-purple-50',
-  },
-];
+import { getTestimonials } from '@/lib/roundAssets';
+import { useToast } from '../Toast';
 
 export default function SocialProof({ round }: { round: number}) {
+    const { showToast } = useToast();
     const [testimonials, setTestimonials] = useState([]);
+    
+    // Animation states
+    const [heroVisible, setHeroVisible] = useState(false);
+    const [imageVisible, setImageVisible] = useState(false);
+    const [testimonialsVisible, setTestimonialsVisible] = useState(false);
+    const [conclusionVisible, setConclusionVisible] = useState(false);
+    const [buttonsVisible, setButtonsVisible] = useState(false);
+
     useEffect(() => {
+        async function getSocialProofData() {
+            const response = await getTestimonials(round);
+            if(response.status != 200) {
+                showToast('error', 'Unable to get Testimonials', 3000);
+            } else {
+                setTestimonials(response.data.testimonials);
+            }
+        }
+        getSocialProofData();
 
+        // Stagger the animations with gentle timing
+        const animationSequence = [
+            { setter: setHeroVisible, delay: 100 },
+            { setter: setImageVisible, delay: 400 },
+            { setter: setTestimonialsVisible, delay: 700 },
+            { setter: setConclusionVisible, delay: 1000 },
+            { setter: setButtonsVisible, delay: 1200 }
+        ];
 
+        animationSequence.forEach(({ setter, delay }) => {
+            setTimeout(() => setter(true), delay);
+        });
     }, [])
-
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-12">
       {/* Hero Section */}
       <section className="mb-16">
-        <div className="max-w-3xl mx-auto text-center">
+        <div 
+          className={`max-w-3xl mx-auto text-center transition-all duration-700 ease-out ${
+            heroVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
             What Others Felt in This Round
           </h2>
@@ -61,7 +61,13 @@ export default function SocialProof({ round }: { round: number}) {
             You're not alone in feeling the heat.
           </p>
 
-          <div className="mt-10 flex justify-center">
+          <div 
+            className={`mt-10 flex justify-center transition-all duration-700 ease-out delay-300 ${
+              imageVisible 
+                ? 'opacity-100 translate-y-0 scale-100' 
+                : 'opacity-0 translate-y-4 scale-95'
+            }`}
+          >
             <div className="relative w-64 h-64">
               <Image
                 src="https://storage.googleapis.com/uxpilot-auth.appspot.com/78e1578dcd-a862d7731ac35566ebc2.png"
@@ -76,26 +82,46 @@ export default function SocialProof({ round }: { round: number}) {
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials testimonials={testimonials}/>
+      <div 
+        className={`transition-all duration-700 ease-out ${
+          testimonialsVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <Testimonials testimonials={testimonials}/>
+      </div>
 
       {/* Conclusion Section */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ease-out ${
+          conclusionVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-6'
+        }`}
+      >
         <p className="text-xl font-medium text-blue-700 p-6 rounded-lg bg-blue-50 border border-blue-100">
           That tension you're feeling? It's what growing feels like — from task-doer to system builder.
         </p>
       </div>
 
       {/* Action Buttons */}
-      <div className="max-w-xl mx-auto flex justify-center space-x-4">
+      <div 
+        className={`max-w-xl mx-auto flex justify-center space-x-4 transition-all duration-700 ease-out ${
+          buttonsVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-4'
+        }`}
+      >
         <button
-          className="px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-300 flex items-center"
+          className="px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-300 flex items-center transform hover:scale-105 transition-transform"
           onClick={() => console.log('Previous clicked')}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Previous
         </button>
         <button
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 flex items-center"
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 flex items-center transform hover:scale-105 transition-transform"
           onClick={() => console.log('Continue clicked')}
         >
           Continue
