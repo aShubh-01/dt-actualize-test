@@ -8,7 +8,6 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-    <Header/>
     <Hero/>
     <CorePhilosophy/>
     <CaseStudies/>
