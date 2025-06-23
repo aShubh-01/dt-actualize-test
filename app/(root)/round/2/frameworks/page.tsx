@@ -11,7 +11,6 @@ const page = () => {
   return (
     <>
     <div className='flex flex-col w-full'>
-    <Header/>
     <HeroSection/>
     <FrameworksSection/>
     </div>
