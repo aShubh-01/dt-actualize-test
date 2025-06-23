@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface Testimonial {
-  id: string;
+  _id: string;
   name: string;
   role: string;
   quote: string;
@@ -14,6 +14,8 @@ interface TestimonialsProps {
 }
 
 export const Testimonials = ({testimonials} : TestimonialsProps) => {
+    if(!testimonials.length) return <div className='flex justify-center'>Loading Testimonials</div>
+
     return <section className="mb-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
@@ -23,7 +25,7 @@ export const Testimonials = ({testimonials} : TestimonialsProps) => {
           <div className="grid md:grid-cols-3 gap-6 mt-10">
             {testimonials.map((testimonial) => (
               <div
-                key={testimonial.id}
+                key={testimonial._id}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="p-6">
