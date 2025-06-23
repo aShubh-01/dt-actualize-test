@@ -8,12 +8,13 @@ import HeroSection from '@/components/round2/frameworks/Hero'
 import React from 'react'
 
 const page = () => {
+  
   return (
     <>
     <div className='flex flex-col w-full'>
     <Header/>
     <HeroSection/>
-    <FrameworksSection/>
+    <FrameworksSection />
     </div>
     {/* <Header/>
     <HeroSection/>
