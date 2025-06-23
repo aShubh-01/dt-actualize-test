@@ -1,21 +1,25 @@
+// /app/api/v1/round/asset/framework/route.ts
+
 import { NextResponse } from 'next/server';
 import { connectDatabase } from '@/lib/mongodb';
 
-// ✅ GET: Get frameworks by round
+// ✅ GET: Fetch frameworks by round
 export async function GET(req: Request) {
   try {
     const { db } = await connectDatabase();
     const { searchParams } = new URL(req.url);
-
     const round = searchParams.get('round');
 
     if (!round) {
-      return NextResponse.json({ message: 'Missing round parameter' }, { status: 400 });
+      return NextResponse.json(
+        { message: 'Missing round parameter in query string' },
+        { status: 400 }
+      );
     }
 
     const frameworks = await db
       .collection('frameworks')
-      .find({ round }) // Assumes each document has a `round` field (e.g. "round1")
+      .find({ round })
       .toArray();
 
     return NextResponse.json({ frameworks });
@@ -28,7 +32,7 @@ export async function GET(req: Request) {
   }
 }
 
-// ✅ POST: Save student selection of a framework in a round
+// ✅ POST: Save a student's selected framework in a round
 export async function POST(req: Request) {
   try {
     const { db } = await connectDatabase();
