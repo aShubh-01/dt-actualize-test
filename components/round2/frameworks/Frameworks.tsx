@@ -1,25 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-interface FrameworkItem {
-  id?: string;
-  _id?: string;
-  title: string;
-  description: string;
-  image: string;
-  alt: string;
-  bgColor?: string;
-  gridClass?: string;
-}
+const FrameworksSection = () => {
+  const [frameworks, setFrameworks] = useState<any[]>([]);
 
-interface FrameworksSectionProps {
-  frameworks: FrameworkItem[];
-}
+  useEffect(() => {
+    const fetchFrameworks = async () => {
+      try {
+        const res = await fetch('/api/frameworks');
+        const data = await res.json();
+        setFrameworks(data.frameworks); // Ensure API returns { frameworks: [...] }
+      } catch (error) {
+        console.error('Error fetching frameworks:', error);
+      }
+    };
 
-const FrameworksSection: React.FC<FrameworksSectionProps> = ({ frameworks }) => {
+    fetchFrameworks();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

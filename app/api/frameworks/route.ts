@@ -1,22 +1,11 @@
 import { NextResponse } from 'next/server';
 import { connectDatabase } from '@/lib/mongodb';
 
-// ✅ GET: Get frameworks by round
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const { db } = await connectDatabase();
-    const { searchParams } = new URL(req.url);
 
-    const round = searchParams.get('round');
-
-    if (!round) {
-      return NextResponse.json({ message: 'Missing round parameter' }, { status: 400 });
-    }
-
-    const frameworks = await db
-      .collection('frameworks')
-      .find({ round }) // Assumes each document has a `round` field (e.g. "round1")
-      .toArray();
+    const frameworks = await db.collection('frameworks').find({}).toArray();
 
     return NextResponse.json({ frameworks });
   } catch (error) {
@@ -28,17 +17,19 @@ export async function GET(req: Request) {
   }
 }
 
-// ✅ POST: Save student selection of a framework in a round
+
+
 export async function POST(req: Request) {
   try {
     const { db } = await connectDatabase();
     const body = await req.json();
 
-    const { studentId, frameworkId, round, selectedAt } = body;
+    // Validate required fields (customize based on your frontend form data)
+    const { studentId, frameworkId, selectedAt } = body;
 
-    if (!studentId || !frameworkId || !round) {
+    if (!studentId || !frameworkId) {
       return NextResponse.json(
-        { message: 'Missing required fields: studentId, frameworkId, or round' },
+        { message: 'Missing required fields: studentId or frameworkId' },
         { status: 400 }
       );
     }
@@ -46,8 +37,7 @@ export async function POST(req: Request) {
     const result = await db.collection('studentFrameworks').insertOne({
       studentId,
       frameworkId,
-      round,
-      selectedAt: selectedAt || new Date(),
+      selectedAt: selectedAt || new Date()
     });
 
     return NextResponse.json(
