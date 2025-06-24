@@ -1,48 +1,59 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Beaker, Users, Rocket, ArrowRight } from 'lucide-react';
+import { TrendingUp, Beaker, Users, Rocket, ArrowRight, Building } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
-const CaseStudies: React.FC = () => {
-  const caseStudies = [
-    {
-      id: "wishkarma-case",
-      company: "Wishkarma",
-      description: "Designed a vendor escalation system from site data patterns",
-      tag: "Data-Driven Architecture",
+// UI configuration based on case study tags/types
+const getUIConfig = (tag: string) => {
+  const configs: Record<string, {
+    icon: React.ComponentType<any>;
+    iconBg: string;
+    iconColor: string;
+  }> = {
+    'Data-Driven Architecture': {
       icon: TrendingUp,
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-600"
+      iconBg: 'bg-purple-100',
+      iconColor: 'text-purple-600'
     },
-    {
-      id: "biotech-case",
-      company: "Unique Biotech",
-      description: "Built lab-stage trackers that flagged friction before batch failures",
-      tag: "Predictive Systems",
+    'Predictive Systems': {
       icon: Beaker,
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600"
+      iconBg: 'bg-green-100',
+      iconColor: 'text-green-600'
     },
-    {
-      id: "kreative-case",
-      company: "Kreative Organics",
-      description: "Reframed KPIs to reflect team behavior, not just output",
-      tag: "Behavioral Metrics",
+    'Behavioral Metrics': {
       icon: Users,
-      iconBg: "bg-orange-100",
-      iconColor: "text-orange-600"
+      iconBg: 'bg-orange-100',
+      iconColor: 'text-orange-600'
     },
-    {
-      id: "escape-velocity-case",
-      company: "Escape Velocity",
-      description: "Connected belief-tagged feedback with mentor effectiveness scores",
-      tag: "Impact Correlation",
+    'Impact Correlation': {
       icon: Rocket,
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600"
+      iconBg: 'bg-blue-100',
+      iconColor: 'text-blue-600'
     }
-  ];
+  };
+
+  // Fallback configuration for unknown tags
+  return configs[tag] || {
+    icon: Building,
+    iconBg: 'bg-gray-100',
+    iconColor: 'text-gray-600'
+  };
+};
+
+interface CaseStudy {
+  _id: string;
+  company: string;
+  description: string;
+  tag: string;
+}
+
+type CaseStudyProps = {
+  caseStudies?: CaseStudy[]
+}
+
+const CaseStudies: React.FC<CaseStudyProps> = ({ caseStudies }) => {
 
   return (
     <motion.section 
@@ -53,15 +64,16 @@ const CaseStudies: React.FC = () => {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8 }}
     >
-      <div className="max-w-7xl mx-[-100px] px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {caseStudies.map((study, index) => {
-            const IconComponent = study.icon;
+          {caseStudies?.map((study, index) => {
+            const uiConfig = getUIConfig(study.tag);
+            const IconComponent = uiConfig.icon;
             
             return (
               <motion.div
-                key={study.id}
-                id={study.id}
+                key={study._id}
+                id={study._id}
                 className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
@@ -86,14 +98,14 @@ const CaseStudies: React.FC = () => {
                   transition={{ delay: (index * 0.2) + 0.2, duration: 0.5 }}
                 >
                   <motion.div 
-                    className={`w-12 h-12 ${study.iconBg} rounded-xl flex items-center justify-center mr-4`}
+                    className={`w-12 h-12 ${uiConfig.iconBg} rounded-xl flex items-center justify-center mr-4`}
                     whileHover={{ 
                       scale: 1.1,
                       rotate: 5,
                       transition: { type: "spring", stiffness: 400, damping: 10 }
                     }}
                   >
-                    <IconComponent className={`${study.iconColor}`} size={24} />
+                    <IconComponent className={uiConfig.iconColor} size={24} />
                   </motion.div>
                   <motion.h3 
                     className="text-xl md:text-2xl font-bold text-gray-900"
