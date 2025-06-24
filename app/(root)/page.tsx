@@ -5,6 +5,7 @@
 // import HowToApproach from "@/components/Hero/HowToApproach";
 // import KeySections from "@/components/Hero/KeySection";
 // import ThinkWithAI from "@/components/Hero/ThinkingWithAi";
+import Footer from "@/components/Footer";
 import AIThinkingPartner from "@/components/round1/Welcome-Page/AIThinkingPartner";
 import CTASection from "@/components/round1/Welcome-Page/CTASection";
 import Header from "@/components/round1/Welcome-Page/Header";
@@ -12,7 +13,6 @@ import HeroPanel from "@/components/round1/Welcome-Page/HeroPanel";
 import HowToApproach from "@/components/round1/Welcome-Page/HowToApproach";
 import KeySections from "@/components/round1/Welcome-Page/KeySection";
 import ThinkWithAI from "@/components/round1/Welcome-Page/ThinkingWithAi";
-import Image from "next/image";
 import { FC } from "react";
 
 const Home: FC = () => {
@@ -25,7 +25,7 @@ const Home: FC = () => {
         <AIThinkingPartner/>
         <HowToApproach/>
         <CTASection/>
-       
+        <Footer />
         </>
     )
 }

@@ -5,7 +5,7 @@ const page = () => {
 
   return (
     <div>
-    <GrowthPrograms round={2}/>
+    <GrowthPrograms round={3}/>
     </div>
   )
 }
