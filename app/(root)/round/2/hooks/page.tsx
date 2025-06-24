@@ -10,8 +10,6 @@ const page = () => {
   return (
     <>
     <div className='flex flex-col'>
-
-    <Header/>
     <HeroSection/>
     <DashboardSection/>
     <ChallengeSection/>
