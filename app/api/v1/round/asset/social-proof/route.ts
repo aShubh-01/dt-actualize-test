@@ -3,7 +3,7 @@ import { connectDatabase } from "@/lib/mongodb";
 
 export async function GET(req: NextRequest) {
     try {
-        const round = req.nextUrl.searchParams.get('round');
+        const round = Number(req.nextUrl.searchParams.get('round'));
 
         if(!round) {
             return NextResponse.json({
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         const { db } = await connectDatabase();
 
         const testimonials = await db.collection('social-proof').find(
-            { round: 2 },
+            { round },
             { projection: { 
                 _id: 1,
                 name: 1,
