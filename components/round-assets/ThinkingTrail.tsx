@@ -48,7 +48,7 @@ export default function ThinkingTrail({ round }: ThinkingTrailProps) {
 
   return (
     <div className="w-full">
-      <Hero />
+      <Hero round={round}/>
       <NoticedSection observations={observations} />
       <WatchSection watchPoints={watchPoints} />
       <CompassSection />

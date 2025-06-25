@@ -14,7 +14,7 @@ interface HooksProps {
 const HOOKS: React.FC<HooksProps> = ({ round }) => {
   return (
     <div className='flex flex-col'>
-      <HeroSection />
+      <HeroSection round={round}/>
       <DashboardSection />
       <ChallengeSection />
       <ImpactSection />
