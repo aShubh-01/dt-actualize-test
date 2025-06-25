@@ -1,19 +1,5 @@
-import CompassSection from '@/components/round2/thinking-trail/CompassSection'
-import Header from '@/components/round2/thinking-trail/Header'
-import Hero from '@/components/round2/thinking-trail/HeroSection'
-import WatchSection from '@/components/round2/thinking-trail/WhatToWatch'
-import NoticedSection from '@/components/round2/thinking-trail/WhatWeNoticed'
-import React from 'react'
-
-const page = () => {
-    return (
-        <div className='w-full'>
-            <Hero />
-            <NoticedSection/>
-            <WatchSection/>
-            <CompassSection/>
-        </div>
-    )
+import ThinkingTrail from "@/components/round-assets/ThinkingTrail";
+import React from "react";
+export default function Page() {
+  return <ThinkingTrail round={1} />;
 }
-
-export default page
