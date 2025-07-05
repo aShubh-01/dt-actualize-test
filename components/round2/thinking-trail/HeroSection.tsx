@@ -1,13 +1,14 @@
-'use client'
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Compass } from 'lucide-react';
 
 interface HeroProps {
   className?: string;
+  round: string | number; // round prop added
 }
 
-const Hero: React.FC<HeroProps> = ({ className = '' }) => {
+const Hero: React.FC<HeroProps> = ({ className = '', round }) => {
   return (
     <motion.section 
       id="hero" 
@@ -54,7 +55,7 @@ const Hero: React.FC<HeroProps> = ({ className = '' }) => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.6 }}
             >
-              Strategic Debrief - Round 2
+              Strategic Debrief - Round {round}
             </motion.span>
           </motion.div>
 
@@ -109,7 +110,7 @@ const Hero: React.FC<HeroProps> = ({ className = '' }) => {
             Before you dive in, let's look at how you've thought so far.
           </motion.p>
 
-          {/* Empty placeholders from original */}
+          {/* Placeholder */}
           <motion.div 
             className="mt-8 flex items-center justify-center space-x-2 text-gray-500"
             initial={{ opacity: 0 }}

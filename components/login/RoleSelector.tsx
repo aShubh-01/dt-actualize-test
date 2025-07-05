@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useToast } from "./Toast";
+import { useToast } from "../Toast";
 import axios from 'axios';
 
 type Role = {

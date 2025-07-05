@@ -14,9 +14,14 @@ export async function POST(req: NextRequest) {
 
         const { db } = await connectDatabase();
 
-        const newManifesto = await db.collection('manifestos').insertOne({
+        await db.collection('manifestos').insertOne({
             userId: toObjectId(userId),
-        })
+            manifestoData
+        });
+
+        return NextResponse.json({
+            message: 'Manifesto Submitted!'
+        }, { status: 200 });
 
     } catch (error) {
         console.error('Error creating manifesto:', error);

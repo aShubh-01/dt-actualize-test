@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useStorage } from '@/lib/hooks/useStorage';
 import axios from 'axios';
 import { updateUserStatus } from '@/lib/apiUtil';
+import Footer from '@/components/Footer';
 
 // Separate component that uses useSearchParams
 const Round1Content: React.FC = () => {
@@ -215,6 +216,8 @@ const Round1Content: React.FC = () => {
             <NavigationButtons
               currentQuestionIndex={currentQuestionIndex}
               totalQuestions={questionsData.length}
+              isSubmitted={isSubmitted}
+              setIsSubmitted={setIsSubmitted}
               onBack={handleBack}
               onNext={handleNext}
             />

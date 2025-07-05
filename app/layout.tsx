@@ -20,7 +20,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           <main>
             <Providers>
               {children}
-              <Footer />
             </Providers>
           </main>
         </div>
