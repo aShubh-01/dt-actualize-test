@@ -1,7 +1,10 @@
 // next.config.js
 const nextConfig = {
-    assetPrefix: '/dt-actualize',
-  };
+  images: {
+    domains: ['storage.googleapis.com', 'ui-avatars.com', 'picsum.photos'],
+  },
+  assetPrefix: '/dt-actualize',
+};
   
-  module.exports = nextConfig;
+module.exports = nextConfig;
   
