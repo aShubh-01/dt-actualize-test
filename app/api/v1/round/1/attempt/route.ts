@@ -19,6 +19,11 @@ export async function GET(req: NextRequest) {
             { projection: { roleId: 1 }}
         );
 
+        const roleData = await db.collection('roles').findOne(
+            { _id: toObjectId(attempt?.roleId) },
+            { projection: { roleTitle: 1 }}
+        );
+
         const scenarios = await db.collection("roles_scenarios").aggregate([
             { $match: { roleId: toObjectId(attempt?.roleId) } },
             {
@@ -50,7 +55,8 @@ export async function GET(req: NextRequest) {
         ]).toArray();
 
         return NextResponse.json({
-            message: "Scenarios & Questions fetched successfully",
+            message: "Role Data, Scenarios & Questions fetched successfully",
+            roleTitle: roleData?.roleTitle,
             scenarios
         }, { status: 200 })
 

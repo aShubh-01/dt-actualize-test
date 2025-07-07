@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import QuestionCard, { QuestionData } from '@/components/round1/QuestionCard';
 import TimerModal from '@/components/round1/TimeModal';
-import FeedbackModal from '@/components/round1/FeedbackModal';
+import CTAModal from '@/components/round1/FeedbackModal';
 import LoadingSpinner from '@/components/round1/LoadingSpinner';
 import ProgressBar from '@/components/round1/ProgressBar';
 import NavigationButtons from '@/components/round1/NavigationButtons';
@@ -14,10 +14,10 @@ import { useRouter } from 'next/navigation';
 import { useStorage } from '@/lib/hooks/useStorage';
 import axios from 'axios';
 import { updateUserStatus } from '@/lib/apiUtil';
-import Footer from '@/components/Footer';
 
 // Separate component that uses useSearchParams
 const Round1Content: React.FC = () => {
+  const MIN_CHARS = 1;
   const { showToast } = useToast();
   const { data: session, status } = useSession();
   const { getStorageItem, setStorageItem, removeStorageItem } = useStorage();
@@ -31,7 +31,7 @@ const Round1Content: React.FC = () => {
   const [questionsData, setQuestionsData] = useState<QuestionData[]>([]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [aiFeedback, setAiFeedback] = useState<string | null>(null);
+  const [roleTitle, setRoleTitle] = useState('');
 
   const cleanUp = () => {
     removeStorageItem('selfDefinedTimeline');
@@ -71,6 +71,7 @@ const Round1Content: React.FC = () => {
       try {
         const response = await axios.get(`/api/v1/round/1/attempt?id=${attemptId}`);
         setQuestionsData(response.data.scenarios || []);
+        setRoleTitle(response.data.roleTitle);
       } catch (error) {
         console.error('Error fetching questions:', error);
       } finally {
@@ -108,7 +109,6 @@ const Round1Content: React.FC = () => {
   useEffect(() => {
     if (getStorageItem('isSubmitted', false)) {
       setIsSubmitted(true);
-      setAiFeedback(sessionStorage.getItem('aifeedback'));
     }
   }, [getStorageItem]);
 
@@ -150,6 +150,25 @@ const Round1Content: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+
+    const totalAnswers = Object.keys(answers).length;
+    const totalQuestions = questionsData.length;
+
+
+    if (totalAnswers < totalQuestions) {
+      showToast('error', `Please answer all ${totalQuestions} questions`, 3000);
+      return;
+    }
+
+    const shortAnswers = Object.values(answers).filter(answer =>
+      (answer?.toString().trim() || '').length < MIN_CHARS
+    );
+
+    if (shortAnswers.length > 0) {
+      showToast('error', `All answers must be at least ${MIN_CHARS} characters each`, 3000);
+      return;
+    }
+
     const userId = status === 'authenticated' && session ? session.user.uid : undefined;
     showToast('loading', "Submitting Answers...", 3000);
 
@@ -164,14 +183,11 @@ const Round1Content: React.FC = () => {
       } else {
         showToast('success', "Answers Submitted!", 3000);
         setIsSubmitted(true);
-        setAiFeedback("Dummy Data");
-        setStorageItem('isSubmitted', true);
-        setStorageItem('aifeedback', "Dummy Feedback");
         removeStorageItem('selfDefinedTimeline');
       }
     } catch (err) {
       console.error('Unable to submit answers', err);
-      showToast('error', "Failed to submit answer", 3000);
+      showToast('error', "Error while submitting answers", 3000);
     }
   };
 
@@ -180,15 +196,15 @@ const Round1Content: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
       <TimerModal isOpen={isModalOpen} onTimelineSet={handleTimelineSet} />
-      <FeedbackModal
+      <CTAModal
         isOpen={isSubmitted}
-        feedback={aiFeedback as any}
+        roleTitle={roleTitle}
         onExploreMore={() => {
           cleanUp();
           router.push('/round/1/role-gallery')
         }}
         onLockIn={() => {
-          if(!session) {
+          if (!session) {
             showToast('error', 'Session Not Found', 3000);
             return
           }
@@ -201,6 +217,9 @@ const Round1Content: React.FC = () => {
       <div className="bg-white p-8 rounded-2xl shadow-md max-w-4xl w-full space-y-6 relative">
         {!isModalOpen && questionsData.length > 0 && (
           <>
+            <strong className='flex justify-center text-2xl text-blue-600'>
+              {roleTitle}
+            </strong>
             <ProgressBar
               questionsData={questionsData}
               currentQuestionIndex={currentQuestionIndex}
@@ -218,6 +237,7 @@ const Round1Content: React.FC = () => {
               totalQuestions={questionsData.length}
               isSubmitted={isSubmitted}
               setIsSubmitted={setIsSubmitted}
+              onSubmit={handleSubmit}
               onBack={handleBack}
               onNext={handleNext}
             />
