@@ -64,10 +64,10 @@ const KeySections: FC = () => {
                 {section.title}
               </h3>
               <p className="text-gray-700 mb-4">{section.desc}</p>
-              <span className="inline-flex items-center text-[#0284c7] font-medium hover:cursor-pointer">
+              {/* <span className="inline-flex items-center text-[#0284c7] font-medium hover:cursor-pointer">
                 {section.action}
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </span>
+              </span> */}
             </motion.div>
           ))}
         </div>

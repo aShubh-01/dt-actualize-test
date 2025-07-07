@@ -49,7 +49,7 @@ const Header: FC = () => {
         </motion.span>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-6">
+        {/* <nav className="hidden md:flex items-center space-x-6">
           {['About', 'Program', 'Fellows', 'Resources'].map((item: string) => (
             <motion.span
               whileHover={{ scale: 1.05, color: '#0ea5e9' }}
@@ -60,19 +60,19 @@ const Header: FC = () => {
               {item}
             </motion.span>
           ))}
-        </nav>
+        </nav> */}
 
         {/* Call to Action */}
         <div className="hidden md:flex items-center space-x-4">
           <motion.span
-            whileHover={{ scale: 1.05, color: '#0ea5e9' }}
-            className="text-gray-800 font-medium cursor-pointer transition"
+            whileHover={{ scale: 1.05,}}
+            className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-2 rounded-full text-md transition duration-300 hover:cursor-pointer"
           >
             Login
           </motion.span>
           <motion.span
             whileHover={{ scale: 1.05 }}
-            className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-5 py-2 rounded-full transition duration-300 cursor-pointer"
+            className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-2 rounded-full text-md transition duration-300 hover:cursor-pointer"
           >
             Apply Now
           </motion.span>
