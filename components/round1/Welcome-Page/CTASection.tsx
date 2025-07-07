@@ -25,7 +25,7 @@ export default function CTASection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-4 rounded-full text-lg transition duration-300 hover:cursor-pointer"
+            className="bg-blue-600 hover:bg-blue-800 text-white font-bold px-8 py-4 rounded-full text-lg transition duration-300 hover:cursor-pointer"
           >
             Start Answering Questions
           </motion.button>
