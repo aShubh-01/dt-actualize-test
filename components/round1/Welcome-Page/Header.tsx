@@ -65,16 +65,11 @@ const Header: FC = () => {
         {/* Call to Action */}
         <div className="hidden md:flex items-center space-x-4">
           <motion.span
+            onClick={() => window.location.href = '/login'}
             whileHover={{ scale: 1.05,}}
             className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-2 rounded-full text-md transition duration-300 hover:cursor-pointer"
           >
             Login
-          </motion.span>
-          <motion.span
-            whileHover={{ scale: 1.05 }}
-            className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-2 rounded-full text-md transition duration-300 hover:cursor-pointer"
-          >
-            Apply Now
           </motion.span>
         </div>
 

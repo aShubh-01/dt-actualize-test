@@ -46,7 +46,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
           <button
             onClick={onSubmit}
             disabled={isSubmitted}
-            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 font-semibold transition-all duration-200 shadow-lg shadow-green-600/25 hover:shadow-xl hover:shadow-green-600/30 hover:scale-[1.02]"
+            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-600 hover:to-blue-700 font-semibold transition-all duration-200 shadow-lg shadow-to-blue-700 hover:shadow-xl hover:to-blue-700 hover:scale-[1.02]"
           >
             Submit
           </button>
