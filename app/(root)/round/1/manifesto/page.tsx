@@ -17,35 +17,38 @@ export default function ManifestoPage() {
   const { showToast } = useToast();
   const router = useRouter();
 
-  if(status != 'authenticated') router.push('/login');
+  // if(status != 'authenticated') router.push('/login');
   const questions = [
     {
       id: 1,
       questionText:
-        "When AI responses didn’t align with your intent, how did you notice the deviation and what steps did you take to correct it? Share one failed attempt and what you learned from it.",
+        `When AI gave answers that didn’t match what you wanted, how did you fix them?
+Can you share one time this happened?
+What did you learn from that experience?`,
     },
     {
       id: 2,
       questionText:
-        "While using AI, what was your approach to prompting? Did you craft your own prompts with intent, or rely on existing ones? What decisions guided your iterations?",
+        `When you worked with AI, how did you design your prompts?
+Did you think carefully and experiment, or mostly reuse prompts you already had?
+What helped you decide what to try?`,
     },
     {
       id: 3,
       questionText:
-        "Why do you want to commit to this role, in the context of your growth and our mission? How does this opportunity fit into the kind of impact you want to create?",
+        `Why are you excited about this role?
+How do you think it can help you grow personally and professionally?
+In what way does this role connect with the kind of impact you want to create in the world?`,
     },
   ];
 
-
-  const [feedback, setFeedback] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [loadingFeedback, setLoadingFeedback] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState<Record<number, string>>({
     1: '',
     2: '',
     3: '',
   });
-
 
   const handleChange = (id: number, value: string) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -53,33 +56,36 @@ export default function ManifestoPage() {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText('https://chat.whatsapp.com/invite-link');
-    showToast('success', 'Link copied to clipboard!', 2000);
+    showToast('success', 'Link Copied to clipboard!', 2000);
   };
 
   const handleManifestoSubmit = async () => {
     const allFilled = Object.values(answers).every((ans) => ans.trim() !== '');
+    const allWithinLimit = Object.values(answers).every((ans) => ans.trim().length <= 1000);
     if (!allFilled) {
-      showToast('error', 'Manifesto Empty', 3000);
+      showToast('error', 'Please reflect on all 3 question', 3000);
+      return;
+    }
+
+    if (!allWithinLimit) {
+      showToast('error', 'Each answer must be 1000 characters or less', 3000);
       return;
     }
 
     setShowModal(true);
-    setLoadingFeedback(true);
+    setLoading(true);
 
     const payload = {
-      candidate_name: session?.user.name,
-      candidate_id: session?.user.uid,
-      candidate_email: session?.user.email,
+      userId: session?.user.uid,
+      user_email: session?.user.email,
       q1: answers[1],
       q2: answers[2],
       q3: answers[3],
     };
 
-
-
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/evaluate`,
+        `/api/v1/round/1/manifesto`,
         payload,
         {
           headers: {
@@ -90,16 +96,15 @@ export default function ManifestoPage() {
 
 
       if (response.status === 200) {
-        setFeedback(response.data.feedback);
-        setLoadingFeedback(false);
-        showToast('success', 'Feedback received!', 3000);
+        setLoading(false);
+        showToast('success', 'Manifesto Submitted', 3000);
       } else {
-        setLoadingFeedback(false);
-        showToast('error', 'Unable to evaluate manifesto', 3000);
+        setLoading(false);
+        setShowModal(false);
+        showToast('error', 'Unable to submit manifesto', 3000);
       }
     } catch (error) {
       console.error(error);
-      setLoadingFeedback(false);
       showToast('error', 'Something went wrong', 3000);
     }
 
@@ -112,8 +117,8 @@ export default function ManifestoPage() {
         {/* Header */}
         <div className="text-center mb-3">
 
-          <p className=" text-blue-600 text-lg leading-relaxed max-w-xl mx-auto font-sans font-semibold">
-            You've explored five real moments where systems met people. Now, answer the three questions with your own intellect and experience.
+          <p className=" text-blue-600 text-xl leading-relaxed max-w-2xl mx-auto font-sans font-semibold">
+            You've explored five real moments where systems met people. Now, answer these three questions with your own intellect, rigor and experience.
           </p>
         </div>
 
@@ -121,7 +126,7 @@ export default function ManifestoPage() {
 
           {questions.map((question) => (
             <div key={question.id} className="space-y-2">
-              <label className="block text-gray-900 text-md">
+              <label className="block text-gray-900 text-lg">
                 {question.questionText}
               </label>
               <div className="relative">
@@ -148,38 +153,40 @@ export default function ManifestoPage() {
       {/* Feedback Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white w-full max-w-xl p-6 rounded-2xl shadow-lg">
-            {loadingFeedback ? (
+          <div className="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-lg">
+            {loading ? (
               <div className="text-center py-12">
                 <div className="loader mx-auto mb-4 w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-gray-700">Evaluating your manifesto...</p>
+                <p className="text-gray-700">Submitting your manifesto...</p>
               </div>
             ) : (
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-4">Feedback</h2>
-                <p className="text-gray-700 whitespace-pre-wrap">{feedback}</p>
+                <h2 className="text-lg font-semibold text-gray-800 mb-4">Round 1 Completed!</h2>
                 <div className='my-8'>
-                <h2 className="text-xl font-semibold text-blue-600 flex justify-center">You're one step closer to becoming a leader 🎉.</h2>
-                <p className="text-gray-700 text-sm flex justify-center">
-                  Your reflection shows intent — you're now ready for Round 2.
-                </p>
+                  <h2 className="text-xl font-semibold text-blue-600 flex justify-center">Thanks for Staying Sharp.</h2>
+                  <p className="text-gray-700 text-md flex justify-center">
+                    To Process to Round 2, Copy the Link or Click the Button to Join the Whatsapp Group.
+                  </p>
                 </div>
                 <div className="flex justify-center items-center gap-2">
-                <a
-              href="https://chat.whatsapp.com/invite-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center mt-4 px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
-            >
-              Join Round 2 WhatsApp Group
-            </a>
-            <button
-                  onClick={handleCopyLink}
-                  className="flex mt-3 p-2 items-center rounded-xl border border-gray-300 hover:bg-gray-100"
-                >
-                  <Copy className="w-4 h-4 text-gray-600" />
-                </button>
-            </div>
+                  <a
+                    title="Join Whatsapp Group"
+                    href="https://chat.whatsapp.com/invite-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center mt-4 px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
+                  >
+                    Join Round 2 WhatsApp Group
+                  </a>
+                  <button
+                    title="Copy Whatsapp Invite Link"
+                    onClick={handleCopyLink}
+                    className="flex mt-4 p-2 h-10 w-10 justify-center items-center rounded-xl border border-gray-300 hover:bg-gray-100"
+
+                  >
+                    <Copy className="w-4 h-4 text-gray-600" />
+                  </button>
+                </div>
               </div>
             )}
           </div>

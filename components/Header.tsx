@@ -1,7 +1,6 @@
 import React from "react";
 
 const Header = () => {
-  const name = "Priyanshu"
   return (
     <main className="flex justify-between p-5">
       <section>

@@ -4,19 +4,22 @@ import { toObjectId } from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
     try {
-        const { userId, manifestoData } = await req.json();
+        const { userId, user_email, q1, q2, q3 } = await req.json();
 
-        if(!userId || !manifestoData) {
+        if(!userId || !user_email || !q1 || !q2 ||!q3) {
             return NextResponse.json({
-                error: 'UserId & Manifesto Data required',
+                error: 'Incomplete Request Body',
             }, { status: 400 })
         }
 
         const { db } = await connectDatabase();
 
-        await db.collection('manifestos').insertOne({
+        await db.collection('manifesto_answers').insertOne({
             userId: toObjectId(userId),
-            manifestoData
+            userEmail: user_email,
+            negative_prompting: q1,
+            prompt_engineering: q2,
+            growth_manifesto: q3
         });
 
         return NextResponse.json({
