@@ -1,11 +1,17 @@
 'use client';
 
-import { Layers, Bookmark, BookMarked, ArrowRight, X } from 'lucide-react';
+import {
+  Layers,
+  Bookmark,
+  BookMarked,
+  ArrowRight,
+  X,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useToast } from '@/components/Toast'; 
+import { useToast } from '@/components/Toast';
 import axios from 'axios';
 
 type Role = {
@@ -47,7 +53,7 @@ export default function RoleGallerySection() {
     try {
       const response = await axios.put('/api/v1/user/status', {
         userId,
-        newStatus
+        newStatus,
       });
 
       if (response.status !== 200) {
@@ -55,7 +61,7 @@ export default function RoleGallerySection() {
         return false;
       }
       return true;
-    } catch (err) {
+    } catch {
       showToast('error', 'Status update failed', 3000);
       return false;
     }
@@ -65,7 +71,7 @@ export default function RoleGallerySection() {
     try {
       const response = await axios.post('/api/v1/round/1/attempt', {
         userId,
-        roleId
+        roleId,
       });
 
       if (response.status !== 200) {
@@ -74,7 +80,7 @@ export default function RoleGallerySection() {
       }
 
       return response.data.attemptId;
-    } catch (error) {
+    } catch {
       showToast('error', 'Failed to start round', 3000);
       return null;
     }
@@ -89,18 +95,13 @@ export default function RoleGallerySection() {
     const userId = session.user.uid;
     showToast('loading', 'Initiating Round 1', 3000);
 
-    try {
-      const statusUpdated = await updateUserStatus(userId, 'ROUND_1');
-      if (!statusUpdated) return;
+    const statusUpdated = await updateUserStatus(userId, 'ROUND_1');
+    if (!statusUpdated) return;
 
-      const attemptId = await initiateRound1(userId, roleId);
-      if (!attemptId) return;
+    const attemptId = await initiateRound1(userId, roleId);
+    if (!attemptId) return;
 
-      router.push(`/round/1?id=${attemptId}`);
-    } catch (err) {
-      console.error(err);
-      showToast('error', 'Unexpected error occurred', 3000);
-    }
+    router.push(`/round/1?id=${attemptId}`);
   };
 
   const handleLoadMore = () => {
@@ -108,105 +109,110 @@ export default function RoleGallerySection() {
   };
 
   return (
-    <section className="px-[200px] mb-12 relative">
-      {/* Heading + Search */}
-      <div className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <Layers className="text-indigo-500" />
-          <span className="text-lg font-semibold text-gray-900">Explore Roles</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <input
-            placeholder="Search roles, skills, backgrounds..."
-            className="rounded-full px-4 py-2 border border-gray-200 text-sm w-64 focus:outline-none focus:border-indigo-400 transition"
-          />
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="relative group flex items-center gap-1 px-3 py-2 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold text-sm transition"
-          >
-            <Bookmark className="w-4 h-4" />
-            Bookmarks
-            {bookmarkedIds.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full px-2 py-0.5 text-xs font-bold">
-                {bookmarkedIds.length}
-              </span>
-            )}
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {roles.slice(0, visibleCount).map((role, index) => (
-          <motion.div
-            key={role._id}
-            className="bg-gray-50 rounded-2xl p-6 shadow-lg hover:-translate-y-2 hover:shadow-xl relative cursor-pointer transition-transform duration-300"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            viewport={{ once: true }}
-            onClick={() => setActiveCard(role)}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleBookmark(role._id);
-              }}
-              className={`absolute right-6 top-6 z-10 ${bookmarkedIds.includes(role._id)
-                ? 'text-indigo-500'
-                : 'text-gray-400 hover:text-indigo-500'
-                } transition`}
+    <section className="w-full mb-12 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-24">
+        {/* Heading + Search */}
+        <div className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <Layers className="text-indigo-500" />
+            <span className="text-lg font-semibold text-gray-900">
+              Explore Roles
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              placeholder="Search roles, skills, backgrounds..."
+              className="rounded-full px-4 py-2 border border-gray-200 text-sm w-full sm:w-64 focus:outline-none focus:border-indigo-400 transition"
+            />
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="relative group flex items-center gap-1 px-3 py-2 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold text-sm transition"
             >
-              {bookmarkedIds.includes(role._id) ? (
-                <BookMarked className="w-5 h-5" />
-              ) : (
-                <Bookmark className="w-5 h-5" />
+              <Bookmark className="w-4 h-4" />
+              Bookmarks
+              {bookmarkedIds.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full px-2 py-0.5 text-xs font-bold">
+                  {bookmarkedIds.length}
+                </span>
               )}
-            </button>
+            </motion.button>
+          </div>
+        </div>
 
-            <div className="mb-4">
-              <img
-                src={role.roleIconUrl || '/default.png'}
-                alt={role.roleTitle}
-                className="w-full h-48 object-cover rounded-xl"
-              />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              {role.roleTitle}
-            </h3>
-            <p className="text-sm text-gray-700 mb-4">
-              {role.roleDescription.split(' ').slice(0, 6).join(' ')}...
-            </p>
-
-            <span className="inline-flex">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {roles.slice(0, visibleCount).map((role, index) => (
+            <motion.div
+              key={role._id}
+              className="bg-gray-50 rounded-2xl p-6 shadow-lg hover:-translate-y-2 hover:shadow-xl relative cursor-pointer transition-transform duration-300"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              onClick={() => setActiveCard(role)}
+            >
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleStartRound(role._id);
+                  toggleBookmark(role._id);
                 }}
-                className="px-4 py-2 rounded-full bg-violet-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
+                className={`absolute right-6 top-6 z-10 ${
+                  bookmarkedIds.includes(role._id)
+                    ? 'text-indigo-500'
+                    : 'text-gray-400 hover:text-indigo-500'
+                } transition`}
               >
-                Start Round 1
-              </motion.button>
-            </span>
-          </motion.div>
-        ))}
-      </div>
+                {bookmarkedIds.includes(role._id) ? (
+                  <BookMarked className="w-5 h-5" />
+                ) : (
+                  <Bookmark className="w-5 h-5" />
+                )}
+              </button>
 
-      {/* Load More */}
-      {visibleCount < roles.length && (
-        <div className="flex justify-center mt-10">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            onClick={handleLoadMore}
-            className="flex items-center gap-2 px-6 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow transition"
-          >
-            <Bookmark className="w-4 h-4" />
-            Load More Roles
-          </motion.button>
+              <div className="mb-4">
+                <img
+                  src={role.roleIconUrl || '/default.png'}
+                  alt={role.roleTitle}
+                  className="w-full h-48 object-cover rounded-xl"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                {role.roleTitle}
+              </h3>
+              <p className="text-sm text-gray-700 mb-4">
+                {role.roleDescription.split(' ').slice(0, 6).join(' ')}...
+              </p>
+
+              <span className="inline-flex">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleStartRound(role._id);
+                  }}
+                  className="px-4 py-2 rounded-full bg-violet-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
+                >
+                  Start Round 1
+                </motion.button>
+              </span>
+            </motion.div>
+          ))}
         </div>
-      )}
+
+        {/* Load More */}
+        {visibleCount < roles.length && (
+          <div className="flex justify-center mt-10">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              onClick={handleLoadMore}
+              className="flex items-center gap-2 px-6 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow transition"
+            >
+              <Bookmark className="w-4 h-4" />
+              Load More Roles
+            </motion.button>
+          </div>
+        )}
+      </div>
 
       {/* Modal */}
       <AnimatePresence>
@@ -226,7 +232,7 @@ export default function RoleGallerySection() {
               exit={{ opacity: 0 }}
             >
               <motion.div
-                className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6 relative"
+                className="w-full max-w-xl mx-4 bg-white rounded-2xl shadow-xl p-6 relative"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
@@ -245,7 +251,9 @@ export default function RoleGallerySection() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                   {activeCard.roleTitle}
                 </h2>
-                <p className="text-gray-700 text-sm">{activeCard.roleDescription}</p>
+                <p className="text-gray-700 text-sm">
+                  {activeCard.roleDescription}
+                </p>
                 <div className="mt-6 flex justify-end">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
