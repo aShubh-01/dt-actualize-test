@@ -92,7 +92,7 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
         value={selectedRole?.roleId}
         onChange={(e) => handleRoleChange(e)}
         disabled={isLoading}
-        className="bg-white block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-white block w-full px-4 py-2 border border-gray-300 rounded-[0.5rem] shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <option value="">-- Choose a Role --</option>
         {roles.map((role) => (
@@ -105,9 +105,9 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
       <button
         onClick={handleStart}
         disabled={!selectedRole?.roleId || isLoading}
-        className={`w-full px-4 py-2 rounded-md text-white font-semibold flex items-center justify-center space-x-2 transition-all duration-200 ${
+        className={`w-full px-4 py-2 border rounded-[0.5rem] text-white font-semibold flex items-center justify-center space-x-2 transition-all duration-200 ${
           selectedRole?.roleId && !isLoading
-            ? "bg-blue-600 hover:bg-blue-700"
+            ? "bg-blue-600  hover:bg-blue-700"
             : "bg-gray-300 cursor-not-allowed"
         }`}
       >

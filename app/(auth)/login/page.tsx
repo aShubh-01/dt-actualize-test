@@ -58,14 +58,14 @@ export default function LoginPage() {
     <main className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-white px-4">
       <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-md text-center space-y-6 border border-gray-200">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Welcome to DeepThought Actualize</h1>
+          <h1 className="text-2xl font-bold text-blue-600">Welcome to DeepThought Actualize</h1>
           <p className="text-sm text-gray-500">
             {status === "authenticated" ? "Select your role to get started" : "Please log in to continue"}
           </p>
         </div>
 
         {status === "loading" || loading ? (
-          <p className="text-gray-500 animate-pulse">Loading...</p>
+          <p className="text-gray-500 animate-pulse ">Loading...</p>
         ) : status === "authenticated" ? (
           <RoleSelector uid={session?.user?.uid} roles={roles} />
         ) : (

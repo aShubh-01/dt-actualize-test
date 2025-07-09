@@ -196,7 +196,7 @@ export default function RoleGallerySection() {
                     e.stopPropagation();
                     handleStartRound(role._id);
                   }}
-                  className="px-4 py-2 rounded-full bg-blue-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
+                  className="px-4 py-2 rounded-full bg-blue-600 text-white font-semibold text-sm shadow hover:bg-blue-700 transition"
                 >
                   Start Round 1
                 </motion.button>
@@ -264,7 +264,7 @@ export default function RoleGallerySection() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     onClick={() => handleStartRound(activeCard._id)}
-                    className="px-5 py-2 rounded-full bg-violet-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
+                    className="px-5 py-2 rounded-full bg-blue-600 text-white font-semibold text-sm shadow hover:bg-blue-700 transition"
                   >
                     Start Round 1
                   </motion.button>

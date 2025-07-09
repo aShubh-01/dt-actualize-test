@@ -20,23 +20,17 @@ export default function ManifestoPage() {
     {
       id: 1,
       questionText:
-        `When AI gave answers that didn’t match what you wanted, how did you fix them?
-Can you share one time this happened?
-What did you learn from that experience?`,
+        `When AI output drifted from your intent, explain how you identified the deviation, the methods you applied to realign it, the understanding you built through that process?`,
     },
     {
       id: 2,
       questionText:
-        `When you worked with AI, how did you design your prompts?
-Did you think carefully and experiment, or mostly reuse prompts you already had?
-What helped you decide what to try?`,
+        `How did you approach prompt design when working with AI did you rely on experimentation, reuse existing prompts, or follow specific strategies to decide what to try?`,
     },
     {
       id: 3,
       questionText:
-        `Why are you excited about this role?
-How do you think it can help you grow personally and professionally?
-In what way does this role connect with the kind of impact you want to create in the world?`,
+        `What makes you want to commit to this role, reflecting the transformation you've undergone in this round and your alignment with DeepThought’s vision?`,
     },
   ];
 
@@ -175,7 +169,7 @@ In what way does this role connect with the kind of impact you want to create in
               </div>
             ) : (
               <div>
-                <h2 className="text-lg font-bold text-gray-800 mb-4">Round 1 Completed!</h2>
+                <h2 className="flex justify-center text-lg font-bold text-gray-800 mb-4">Round 1 Completed!!🎉🤩</h2>
                 <div className="my-6 text-center space-y-2">
                   <p className="text-blue-600 text-xl font-semibold">Thanks for staying sharp.</p>
                   <p className="text-gray-700 text-sm sm:text-base">
@@ -187,7 +181,7 @@ In what way does this role connect with the kind of impact you want to create in
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all text-center"
+                    className="px-5 py-2 bg-blue-600 text-white rounded-[0.5rem] font-semibold hover:bg-blue-700 transition-all text-center"
                   >
                     Join Round 2 WhatsApp Group
                   </a>
@@ -196,7 +190,7 @@ In what way does this role connect with the kind of impact you want to create in
                     className="p-2 border rounded-xl hover:bg-gray-100 transition"
                     title="Copy WhatsApp Invite Link"
                   >
-                    <Copy className="w-5 h-5 text-gray-600" />
+                    <Copy className="w-[25px] h-[25px] text-gray-600" />
                   </button>
                 </div>
               </div>
