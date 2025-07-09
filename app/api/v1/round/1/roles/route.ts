@@ -6,7 +6,7 @@ export async function GET() {
         const { db } = await connectDatabase();
         const roles = await db.collection("roles").find(
             { isRoleActive: true }, 
-            { projection: { _id: 1, roleTitle: 1, roleDescription: 1 }}
+            { projection: { _id: 1, roleTitle: 1, roleDescription: 1, roleIconUrl: 1 }}
         ).toArray();
 
         return NextResponse.json({

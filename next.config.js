@@ -1,7 +1,7 @@
 // next.config.js
 const nextConfig = {
   images: {
-    domains: ['storage.googleapis.com', 'ui-avatars.com', 'picsum.photos'],
+    domains: ['storage.googleapis.com', 'i.ibb.co', 'ui-avatars.com', 'picsum.photos'],
   },
   assetPrefix: '/dt-actualize',
 };

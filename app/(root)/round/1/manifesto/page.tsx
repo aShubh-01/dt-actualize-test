@@ -15,7 +15,7 @@ export default function ManifestoPage() {
   const router = useRouter();
   const [whatsappLink, setWhatsappLink] = useState('');
 
-  // if(status != 'authenticated') router.push('/login');
+  if(status != 'authenticated') router.push('/login');
   const questions = [
     {
       id: 1,

@@ -92,7 +92,7 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
         value={selectedRole?.roleId}
         onChange={(e) => handleRoleChange(e)}
         disabled={isLoading}
-        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-white block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <option value="">-- Choose a Role --</option>
         {roles.map((role) => (

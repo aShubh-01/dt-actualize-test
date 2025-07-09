@@ -32,6 +32,7 @@ const Round1Content: React.FC = () => {
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [roleTitle, setRoleTitle] = useState('');
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
   const cleanUp = () => {
     removeStorageItem('selfDefinedTimeline');
@@ -82,8 +83,16 @@ const Round1Content: React.FC = () => {
           setIsSubmitted(true);
           return
         }
+
+        let totalQuestions = 0;
+        response.data.scenarios.forEach((scenario: any) =>{
+          totalQuestions += scenario.questions.length;
+        });
+        console.log(totalQuestions);
+        setTotalQuestions(totalQuestions);
         setQuestionsData(response.data.scenarios || []);
         setRoleTitle(response.data.roleTitle);
+
       } catch (error) {
         console.error('Error fetching questions:', error);
       } finally {
@@ -165,9 +174,7 @@ const Round1Content: React.FC = () => {
   const handleSubmit = async () => {
 
     const totalAnswers = Object.keys(answers).length;
-    const totalQuestions = questionsData.length;
-
-
+    
     if (totalAnswers < totalQuestions) {
       showToast('error', `Please answer all ${totalQuestions} questions`, 3000);
       return;

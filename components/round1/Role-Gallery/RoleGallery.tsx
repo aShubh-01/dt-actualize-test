@@ -36,6 +36,7 @@ export default function RoleGallerySection() {
       try {
         const response = await axios.get('/api/v1/round/1/roles');
         setRoles(response.data.roles);
+        console.log(response.data.roles);
       } catch (error) {
         console.error('Error fetching roles:', error);
       }
@@ -120,12 +121,12 @@ export default function RoleGallerySection() {
         {/* Heading + Search */}
         <div className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Layers className="text-indigo-500" />
+            <Layers className="text-blue-500" />
             <span className="text-lg font-semibold text-gray-900">
               Explore Roles
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <input
               placeholder="Search roles, skills, backgrounds..."
               className="rounded-full px-4 py-2 border border-gray-200 text-sm w-full sm:w-64 focus:outline-none focus:border-indigo-400 transition"
@@ -142,7 +143,7 @@ export default function RoleGallerySection() {
                 </span>
               )}
             </motion.button>
-          </div>
+          </div> */}
         </div>
 
         {/* Cards */}
@@ -157,7 +158,7 @@ export default function RoleGallerySection() {
               viewport={{ once: true }}
               onClick={() => setActiveCard(role)}
             >
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleBookmark(role._id);
@@ -173,8 +174,7 @@ export default function RoleGallerySection() {
                 ) : (
                   <Bookmark className="w-5 h-5" />
                 )}
-              </button>
-
+              </button> */}
               <div className="mb-4">
                 <img
                   src={role.roleIconUrl || '/default.png'}
@@ -196,7 +196,7 @@ export default function RoleGallerySection() {
                     e.stopPropagation();
                     handleStartRound(role._id);
                   }}
-                  className="px-4 py-2 rounded-full bg-violet-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
+                  className="px-4 py-2 rounded-full bg-blue-600 text-white font-semibold text-sm shadow hover:bg-violet-700 transition"
                 >
                   Start Round 1
                 </motion.button>
