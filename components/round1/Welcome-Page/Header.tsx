@@ -63,7 +63,7 @@ const Header: FC = () => {
         </nav> */}
 
         {/* Call to Action */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="md:flex items-center space-x-4">
           <motion.span
             onClick={() => window.location.href = '/login'}
             whileHover={{ scale: 1.05,}}
@@ -74,16 +74,16 @@ const Header: FC = () => {
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden flex items-center">
+        {/* <div className="md:hidden flex items-center">
           <Menu
             className="w-6 h-6 text-gray-800 cursor-pointer"
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Mobile Dropdown Menu */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             variants={mobileMenuVariant}
@@ -108,7 +108,7 @@ const Header: FC = () => {
             )}
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.header>
   );
 };

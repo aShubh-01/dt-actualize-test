@@ -110,81 +110,75 @@ In what way does this role connect with the kind of impact you want to create in
 
   };
 
-  return (
-
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4 font-sans">
-      <div className="w-full max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-3">
-
-          <p className=" text-blue-600 text-xl leading-relaxed max-w-2xl mx-auto font-sans font-semibold">
-            You've explored five real moments where systems met people. Now, answer these three questions with your own intellect, rigor and experience.
+  return  (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-3xl mx-auto">
+        {/* Instruction */}
+        <div className="text-center mb-8">
+          <p className="text-blue-600 text-lg sm:text-xl font-semibold leading-relaxed max-w-2xl mx-auto">
+            You’ve explored five real moments where systems met people. Now, answer these three questions with your own intellect, rigor, and experience.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto p-6 space-y-6 bg-white rounded-xl shadow-lg mt-10">
-
+        {/* Question Form */}
+        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 space-y-6">
           {questions.map((question) => (
-            <div key={question.id} className="space-y-2">
-              <label className="block text-gray-900 text-lg">
+            <div key={question.id} className="space-y-3">
+              <label className="block text-gray-900 font-semibold text-base sm:text-lg">
                 {question.questionText}
               </label>
-              <div className="relative">
-                <textarea
-                  placeholder="Share your answer"
-                  rows={3}
-                  value={answers[question.id]}
-                  onChange={(e) => handleChange(question.id, e.target.value)}
-                  className="w-full border-2 border-gray-200 rounded-2xl p-4 text-gray-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none placeholder-gray-400 bg-white shadow-sm hover:shadow-md"
-                />
-              </div>
+              <textarea
+                placeholder="Share your answer..."
+                rows={4}
+                value={answers[question.id]}
+                onChange={(e) => handleChange(question.id, e.target.value)}
+                className="w-full border-2 border-gray-200 rounded-2xl p-4 text-gray-800 bg-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 placeholder-gray-400 resize-none shadow-sm hover:shadow-md transition-all"
+              />
             </div>
           ))}
 
           <button
             onClick={handleManifestoSubmit}
-            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all"
+            className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all"
           >
             Submit
           </button>
         </div>
       </div>
 
-      {/* Feedback Modal */}
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
+          <div className="bg-white w-full max-w-xl p-6 rounded-2xl shadow-lg">
             {loading ? (
               <div className="text-center py-12">
-                <div className="loader mx-auto mb-4 w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                 <p className="text-gray-700">Submitting your manifesto...</p>
               </div>
             ) : (
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-4">Round 1 Completed!</h2>
-                <div className='my-8'>
-                  <h2 className="text-xl font-semibold text-blue-600 flex justify-center">Thanks for Staying Sharp.</h2>
-                  <p className="text-gray-700 text-md flex justify-center">
-                    To Process to Round 2, Copy the Link or Click the Button to Join the Whatsapp Group.
+                <h2 className="text-lg font-bold text-gray-800 mb-4">Round 1 Completed!</h2>
+                <div className="my-6 text-center space-y-2">
+                  <p className="text-blue-600 text-xl font-semibold">Thanks for staying sharp.</p>
+                  <p className="text-gray-700 text-sm sm:text-base">
+                    To proceed to Round 2, copy the link or click the button to join the WhatsApp group.
                   </p>
                 </div>
-                <div className="flex justify-center items-center gap-2">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
                   <a
-                    title="Join Whatsapp Group"
                     href="https://chat.whatsapp.com/invite-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex justify-center mt-4 px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
+                    className="px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all text-center"
                   >
                     Join Round 2 WhatsApp Group
                   </a>
                   <button
-                    title="Copy Whatsapp Invite Link"
                     onClick={handleCopyLink}
-                    className="flex mt-4 p-2 h-10 w-10 justify-center items-center rounded-xl border border-gray-300 hover:bg-gray-100"
-
+                    className="p-2 border rounded-xl hover:bg-gray-100 transition"
+                    title="Copy WhatsApp Invite Link"
                   >
-                    <Copy className="w-4 h-4 text-gray-600" />
+                    <Copy className="w-5 h-5 text-gray-600" />
                   </button>
                 </div>
               </div>
@@ -192,8 +186,6 @@ In what way does this role connect with the kind of impact you want to create in
           </div>
         </div>
       )}
-
     </div>
-
   );
 }
