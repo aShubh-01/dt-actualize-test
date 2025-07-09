@@ -16,13 +16,22 @@ export async function GET(req: NextRequest) {
         const { db } = await connectDatabase();
         const attempt = await db.collection("round1_attempts").findOne(
             { _id: toObjectId(attemptId) }, 
-            { projection: { roleId: 1 }}
+            { projection: { roleId: 1, isSubmitted: 1 }}
         );
 
         const roleData = await db.collection('roles').findOne(
             { _id: toObjectId(attempt?.roleId) },
             { projection: { roleTitle: 1 }}
         );
+
+        if(attempt?.isSubmitted) {
+            return NextResponse.json({
+                message: 'Round 1 for this role is already attempted',
+                roleTitle: roleData?.roleTitle
+            }, { status: 409 })
+        }
+
+        
 
         const scenarios = await db.collection("roles_scenarios").aggregate([
             { $match: { roleId: toObjectId(attempt?.roleId) } },
@@ -80,10 +89,24 @@ export async function POST(req: NextRequest) {
         } 
 
         const { db } = await connectDatabase();
+
+        const isRoleAttempted = await db.collection("round1_attempts").findOne(
+            { roleId, userId },
+            { projection: { _id: 1 } }
+        );
+
+        if(isRoleAttempted?._id) {
+            return NextResponse.json({
+                message: 'Role Already Attempted',
+                attemptId: isRoleAttempted._id
+            }, { status: 409 });
+        }
+
         const currentDate = new Date()
         const initiatedRound = await db.collection("round1_attempts").insertOne({
             roleId,
             userId,
+            isSubmitted: false,
             createdAt: currentDate,
             updatedAt: currentDate
         });

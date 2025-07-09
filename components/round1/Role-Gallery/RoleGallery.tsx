@@ -72,7 +72,13 @@ export default function RoleGallerySection() {
       const response = await axios.post('/api/v1/round/1/attempt', {
         userId,
         roleId,
+      }, {
+        validateStatus: (status) => { return status < 500 }
       });
+
+      if(response.status == 409) {
+        return response.data.attemptId
+      }
 
       if (response.status !== 200) {
         showToast('error', 'Failed to start round', 3000);

@@ -27,6 +27,13 @@ export async function POST(req: NextRequest) {
         })
 
         const { db } = await connectDatabase();
+        await db.collection("round1_attempts").findOneAndUpdate(
+            { _id: toObjectId(attemptId) },
+            { 
+                $set: { isSubmitted: true }
+            }
+        );
+
         await db.collection("round1_answers").insertMany(formattedAnswers)
 
         return NextResponse.json(
