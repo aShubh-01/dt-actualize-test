@@ -6,16 +6,14 @@ import axios from 'axios';
 import { Copy } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-
-
+import { useEffect, useState } from 'react';
 
 
 export default function ManifestoPage() {
   const { data: session, status } = useSession();
   const { showToast } = useToast();
   const router = useRouter();
+  const [whatsappLink, setWhatsappLink] = useState('');
 
   // if(status != 'authenticated') router.push('/login');
   const questions = [
@@ -50,12 +48,31 @@ In what way does this role connect with the kind of impact you want to create in
     3: '',
   });
 
+  useEffect(() => {
+    if(!session) {
+      showToast('error', 'User Session Not Found', 3000);
+      return
+    }
+    async function getManifestoData() {
+      const response = await axios.get(`/api/v1/round/1/manifesto?userId=${session?.user?.uid}`, {
+        validateStatus: (status) => { return status < 500 }
+      });
+
+      if(response.status == 409) {
+        setWhatsappLink(response.data.whatsappLink)
+        setShowModal(true)
+      }
+    }
+
+    getManifestoData()
+  }, [])
+
   const handleChange = (id: number, value: string) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText('https://chat.whatsapp.com/invite-link');
+    navigator.clipboard.writeText(whatsappLink);
     showToast('success', 'Link Copied to clipboard!', 2000);
   };
 
@@ -97,6 +114,7 @@ In what way does this role connect with the kind of impact you want to create in
 
       if (response.status === 200) {
         setLoading(false);
+        setWhatsappLink(response.data.whatsappLink);
         showToast('success', 'Manifesto Submitted', 3000);
       } else {
         setLoading(false);
@@ -166,7 +184,7 @@ In what way does this role connect with the kind of impact you want to create in
                 </div>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
                   <a
-                    href="https://chat.whatsapp.com/invite-link"
+                    href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all text-center"

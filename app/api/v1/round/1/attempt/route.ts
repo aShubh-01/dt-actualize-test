@@ -95,6 +95,17 @@ export async function POST(req: NextRequest) {
             { projection: { _id: 1 } }
         );
 
+        await db.collection("users").updateOne(
+            { _id: toObjectId(userId) },
+            { 
+                $set: {
+                    currentRoleId: toObjectId(roleId),
+                    updatedAt: new Date()
+                }
+            },
+            { upsert: true }
+        )
+
         if(isRoleAttempted?._id) {
             return NextResponse.json({
                 message: 'Role Already Attempted',
@@ -110,17 +121,6 @@ export async function POST(req: NextRequest) {
             createdAt: currentDate,
             updatedAt: currentDate
         });
-
-        await db.collection("users").updateOne(
-            { _id: toObjectId(userId) },
-            { 
-                $set: {
-                    currentRoleId: toObjectId(roleId),
-                    updatedAt: new Date()
-                }
-            },
-            { upsert: true }
-        )
 
         return NextResponse.json({
             attemptId: initiatedRound.insertedId,

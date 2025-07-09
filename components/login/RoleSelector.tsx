@@ -42,16 +42,16 @@ export default function RoleSelector({ uid, roles }: RoleSelectorProps) {
   };
 
   const initiateRound1 = async (userId: string, roleId: string) => {
-    const response = await axios({
-      url: '/api/v1/round/1/attempt',
-      method: 'POST',
-      headers: {
-        'Content-Type': "application/json"
-      },
-      data: {
-        userId, roleId
+    const response = await axios.post('/api/v1/round/1/attempt', {
+        userId,
+        roleId,
+      }, {
+        validateStatus: (status) => { return status < 500 }
+      });
+
+      if(response.status == 409) {
+        return response.data.attemptId
       }
-    });
 
     if(response.status != 200) {
       showToast('error', 'Failed to Initiate Round 1', 3000);
