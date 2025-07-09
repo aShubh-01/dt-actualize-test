@@ -17,7 +17,7 @@ import { updateUserStatus } from '@/lib/apiUtil';
 
 // Separate component that uses useSearchParams
 const Round1Content: React.FC = () => {
-  const MIN_CHARS = 1;
+  const MIN_CHARS = 150;
   const { showToast } = useToast();
   const { data: session, status } = useSession();
   const { getStorageItem, setStorageItem, removeStorageItem } = useStorage();
@@ -69,7 +69,19 @@ const Round1Content: React.FC = () => {
     if (!attemptId) return;
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get(`/api/v1/round/1/attempt?id=${attemptId}`);
+        const response = await axios.get(`/api/v1/round/1/attempt?id=${attemptId}`, 
+          { 
+            validateStatus: (status) => { return status < 500 }
+          }
+        );
+
+        if(response.status == 409) {
+          setRoleTitle(response.data.roleTitle);
+          showToast('info', 'Round 1 already attempted for this role', 3000);
+          setIsModalOpen(false);
+          setIsSubmitted(true);
+          return
+        }
         setQuestionsData(response.data.scenarios || []);
         setRoleTitle(response.data.roleTitle);
       } catch (error) {
@@ -143,6 +155,7 @@ const Round1Content: React.FC = () => {
     currentQuestionIndex < questionsData.length - 1
       ? setCurrentQuestionIndex(prev => prev + 1)
       : handleSubmit();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBack = () => {
@@ -193,10 +206,9 @@ const Round1Content: React.FC = () => {
 
   if (isLoadingQuestions) return <LoadingSpinner />;
 
-  return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
-      <TimerModal isOpen={isModalOpen} onTimelineSet={handleTimelineSet} />
-      <CTAModal
+
+  if(isSubmitted) return <div className='h-screen'>
+    <CTAModal
         isOpen={isSubmitted}
         roleTitle={roleTitle}
         onExploreMore={() => {
@@ -213,6 +225,11 @@ const Round1Content: React.FC = () => {
           router.push(`/round/1/manifesto`)
         }}
       />
+  </div>
+
+  return (
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+      <TimerModal isOpen={isModalOpen} onTimelineSet={handleTimelineSet} />
 
       <div className="bg-white p-8 rounded-2xl shadow-md max-w-4xl w-full space-y-6 relative">
         {!isModalOpen && questionsData.length > 0 && (

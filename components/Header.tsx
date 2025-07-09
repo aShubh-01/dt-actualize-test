@@ -1,13 +1,26 @@
 import React from "react";
 
-const Header = () => {
+type HeaderProps = {
+  children?: React.ReactNode;
+};
+
+const Header: React.FC<HeaderProps> = ({ children }) => {
   return (
-    <main className="flex justify-between p-5">
-      <section>
-        <img src="logo.svg" alt="" />
-      </section>
-      {/* <section className="font-semibold">{`All The Best ${name}!`}</section> */}
-    </main>
+    <header className="flex items-center justify-between px-6 py-4 bg-white shadow-sm">
+      {/* Logo */}
+      <div className="flex items-center">
+        <img
+          src="/logo.svg"
+          alt="DeepThought Logo"
+          className="h-8 w-auto object-contain"
+        />
+      </div>
+
+      {/* Right-Side JSX */}
+      <div className="flex items-center gap-4">
+        {children}
+      </div>
+    </header>
   );
 };
 
