@@ -18,7 +18,7 @@ const keySections: KeySection[] = [
     title: 'We are not hiring you for an internship.',
     desc:
       "You are an expert who would help us. You're Reframing How employees grow. You're not here to complete tasks. You're here to design behavior — to choreograph how people reflect, grow, and change.",
-    img: '/herocar1.png',
+    img: '/Test1.png',
     action: 'Learn more',
   },
   {
@@ -26,7 +26,7 @@ const keySections: KeySection[] = [
     title: 'Your education is your superpower',
     desc:
       "Whether you're trained in Fine Arts, Design, or Psychology — you have the potential inside you and you will discover it by the end of this round.",
-    img: '/herocar1.1.png',
+    img: '/Test2.png',
     action: 'Discover more',
   },
   {

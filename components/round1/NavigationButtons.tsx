@@ -1,4 +1,5 @@
 import React from 'react';
+import { useToast } from '@/components/Toast'; // if not already imported
 
 interface NavigationButtonsProps {
   currentQuestionIndex: number;
@@ -8,6 +9,8 @@ interface NavigationButtonsProps {
   onBack: () => void;
   onNext: () => void;
   onSubmit: () => void;
+  isCurrentQuestionValid: boolean;
+
 }
 
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
@@ -17,9 +20,20 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   setIsSubmitted,
   onBack,
   onNext,
-  onSubmit
+  onSubmit,
+  isCurrentQuestionValid
+
 }) => {
+  const { showToast } = useToast(); // use toast to show message
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+
+  const handleNextClick = () => {
+    if (!isCurrentQuestionValid) {
+      showToast('error', 'Please fill all answers before proceeding', 3000);
+      return;
+    }
+    onNext(); // only call if valid
+  };
 
   return (
     <div className="flex justify-between pt-6">
@@ -30,18 +44,20 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
       >
         Back
       </button>
-      
+
       <div className="flex gap-3">
         {!isLastQuestion && (
           <button
-            onClick={onNext}
+            onClick={handleNextClick}
             disabled={isSubmitted}
-            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold transition-all duration-200 shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/30 hover:scale-[1.02]"
-          >
+className={`px-6 py-3 rounded-2xl text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-[1.02]
+              ${!isCurrentQuestionValid ? 'bg-gray-300 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'}
+              ${isSubmitted ? 'opacity-50 cursor-not-allowed' : ''}
+            `}          >
             Next
           </button>
         )}
-        
+
         {isLastQuestion && (
           <button
             onClick={onSubmit}

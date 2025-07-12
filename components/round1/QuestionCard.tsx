@@ -17,14 +17,41 @@ interface QuestionCardProps {
   currentQuestionIndex: number;
   answers: Record<string, string>;
   onAnswerChange: (questionId: string, answer: string) => void;
+  setIsCurrentQuestionValid: (valid: boolean) => void;
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
   questionData,
   currentQuestionIndex,
   answers,
-  onAnswerChange
+  onAnswerChange,
+  setIsCurrentQuestionValid
 }) => {
+
+  const [errors, setErrors] = React.useState<Record<string, string>>({});
+
+  const validateAnswer = (questionId: string, value: string) => {
+    const isValid = value.trim().length >= 150;
+
+    setErrors((prev) => {
+      const updated = { ...prev };
+      if (!isValid) {
+        updated[questionId] = 'Your answer must be at least 150 characters long.';
+      } else {
+        delete updated[questionId];
+      }
+      return updated;
+    });
+  };
+
+  React.useEffect(() => {
+    const isValid = questionData.questions.every((q) => {
+      const value = answers[q.id]?.trim() || '';
+      return value.length >= 150;
+    });
+    setIsCurrentQuestionValid(isValid);
+  }, [answers, questionData.questions, setIsCurrentQuestionValid]);
+
   return (
     <div className="space-y-8 w-full">
   {/* Header */}
@@ -64,12 +91,21 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             rows={4}
             value={answers[question.id] || ''}
             onChange={(e) => onAnswerChange(question.id, e.target.value)}
-            className="w-full border-2 border-gray-200 rounded-2xl p-4 text-gray-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none placeholder-gray-400 bg-white shadow-sm hover:shadow-md"
-          />
+            onBlur={(e) =>
+                  validateAnswer(question.id, e.target.value)
+                }
+className={`w-full border-2 ${
+                  errors[question.id] ? 'border-red-500' : 'border-gray-200'
+                } rounded-2xl p-4 text-gray-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none placeholder-gray-400 bg-white shadow-sm hover:shadow-md`}          />
           <div className="absolute bottom-3 right-3 text-xs text-gray-400">
             {answers[question.id]?.length || 0} characters
           </div>
         </div>
+        {errors[question.id] && (
+              <p className="text-sm text-red-600 mt-1">
+                {errors[question.id]}
+              </p>
+            )}
       </div>
     ))}
   </div>

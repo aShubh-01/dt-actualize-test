@@ -35,7 +35,7 @@ export default function HowToApproach() {
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
           How to Approach This Round
         </h2>
-        <div className="h-1 w-20 bg-indigo-500 mb-8" />
+        <div className="h-1 w-20 bg-blue-500 mb-8" />
 
         <motion.ul
           className="space-y-6 text-gray-600"
@@ -50,7 +50,7 @@ export default function HowToApproach() {
               className="flex items-start"
               variants={itemVariants}
             >
-              <CheckCircle className="text-indigo-500 mt-1 mr-3 w-6 h-6 flex-shrink-0" />
+              <CheckCircle className="text-blue-500 mt-1 mr-3 w-6 h-6 flex-shrink-0" />
               <span>{point}</span>
             </motion.li>
           ))}

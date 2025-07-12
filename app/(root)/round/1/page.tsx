@@ -33,6 +33,7 @@ const Round1Content: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [roleTitle, setRoleTitle] = useState('');
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [isCurrentQuestionValid, setIsCurrentQuestionValid] = useState(false);
 
   const cleanUp = () => {
     removeStorageItem('selfDefinedTimeline');
@@ -234,6 +235,8 @@ const Round1Content: React.FC = () => {
       />
   </div>
 
+
+
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
       <TimerModal isOpen={isModalOpen} onTimelineSet={handleTimelineSet} />
@@ -255,6 +258,7 @@ const Round1Content: React.FC = () => {
               currentQuestionIndex={currentQuestionIndex}
               answers={answers}
               onAnswerChange={handleAnswerChange}
+              setIsCurrentQuestionValid={setIsCurrentQuestionValid}
             />
             <NavigationButtons
               currentQuestionIndex={currentQuestionIndex}
@@ -264,6 +268,7 @@ const Round1Content: React.FC = () => {
               onSubmit={handleSubmit}
               onBack={handleBack}
               onNext={handleNext}
+              isCurrentQuestionValid={isCurrentQuestionValid}
             />
           </>
         )}

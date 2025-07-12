@@ -66,7 +66,9 @@ export async function POST(req: NextRequest) {
             userEmail: user_email,
             negative_prompting: q1,
             prompt_engineering: q2,
-            growth_manifesto: q3
+            growth_manifesto: q3,
+            processed:false,
+            submitted_at:new Date()
         });
 
         const currentUserRole = await db.collection("users").findOne({ _id: toObjectId(userId) },

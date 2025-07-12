@@ -63,7 +63,7 @@ const Footer = () => {
                 <i className="ri-linkedin-fill" aria-hidden="true"></i>
               </Link>
               <Link
-                href="https://www.instagram.com/deepthoughtedutechventures?igsh=bnJtdWxjNGJyMmFv"
+                href="https://www.instagram.com/dtgrowthteams/"
                 target="_blank"
                 aria-label="Follow us on Instagram"
                 className="text-2xl text-gray-300 hover:text-pink-400 transition-colors"

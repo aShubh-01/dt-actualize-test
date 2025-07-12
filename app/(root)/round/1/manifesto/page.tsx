@@ -169,7 +169,7 @@ export default function ManifestoPage() {
               </div>
             ) : (
               <div>
-                <h2 className="flex justify-center text-lg font-bold text-gray-800 mb-4">Round 1 Completed!!🎉🤩</h2>
+                <h2 className="flex justify-center text-lg font-bold text-gray-800 mb-[-15px]">Round 1 Completed!!🎉🤩</h2>
                 <div className="my-6 text-center space-y-2">
                   <p className="text-blue-600 text-xl font-semibold">Thanks for staying sharp.</p>
                   <p className="text-gray-700 text-sm sm:text-base">

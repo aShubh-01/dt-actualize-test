@@ -46,7 +46,7 @@ const ThinkWithAI: FC = () => {
             </motion.h2>
 
             <motion.div
-              className="h-1 w-20 bg-[#6366F1] mb-6"
+              className="h-1 w-20 bg-blue-500 mb-6"
               variants={fadeUpVariant}
             />
 
@@ -85,7 +85,7 @@ const ThinkWithAI: FC = () => {
           >
             <img
               className="rounded-2xl shadow-lg object-cover max-h-[22rem] w-full"
-              src="/Image1HeroSection.png"
+              src="/Image1HeroSection1.png"
               alt="person working with AI visualization"
             />
           </motion.div>

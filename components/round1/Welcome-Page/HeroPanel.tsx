@@ -7,12 +7,14 @@ import { FC } from 'react';
 const HeroPanel: FC = () => {
   return (
     <section
-      className="text-white py-24 md:py-32 relative overflow-hidden"
+      className="relative text-white py-24 md:py-32 overflow-hidden"
       style={{
-        backgroundImage: 'linear-gradient(to bottom right, #075985, #701a75)', // primary-800 to secondary-900
+        backgroundImage: 'linear-gradient(to bottom right,rgba(33, 109, 223, 1), #002B80)', // primary-800 to secondary-900
       }}
     >
-      {/* Background Blobs */}
+      {/* <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div> */}
+      {/* <div className="relative z-10"> */}
+
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-0 right-0 w-1/2 h-full">
           <div className="w-full h-full bg-gradient-to-r from-blue-300 to-purple-400 rounded-full blur-3xl transform -translate-y-1/4" />
@@ -21,6 +23,8 @@ const HeroPanel: FC = () => {
           <div className="w-full h-full bg-gradient-to-r from-purple-400 to-pink-300 rounded-full blur-3xl transform translate-y-1/4" />
         </div>
       </div>
+      {/* </div> */}
+      {/* Background Blobs */}
 
       {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
@@ -50,7 +54,7 @@ const HeroPanel: FC = () => {
             transition={{ delay: 0.6, duration: 0.6 }}
           >
             <img
-              className="w-full h-64 object-cover rounded-xl mx-auto"
+              className="w-[620px] h-64 bg-center rounded-xl mx-auto"
               src="/Picture5.png"
               alt="futuristic AI lab with diverse experts collaborating"
             />

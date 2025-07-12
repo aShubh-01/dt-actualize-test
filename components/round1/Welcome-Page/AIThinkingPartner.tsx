@@ -19,7 +19,7 @@ const AIThinkingPartner: FC = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
               AI is Your Thinking Partner
             </h2>
-            <div className="h-1 w-20 bg-indigo-500 mb-6"></div>
+            <div className="h-1 w-20 bg-blue-500 mb-6"></div>
             <div className="prose max-w-none">
               <p className="text-gray-600 mb-4">
                 You can — and should — use tools like UX Pilot to:
@@ -54,7 +54,7 @@ const AIThinkingPartner: FC = () => {
               viewport={{ once: true }}
             >
               <Image
-                src="/Img2HeroSection.png"
+                src="/Img2HeroSection1.png"
                 alt="human and AI collaboration"
                 width={600}
                 height={400}
