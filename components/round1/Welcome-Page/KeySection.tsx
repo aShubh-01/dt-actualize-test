@@ -18,7 +18,7 @@ const keySections: KeySection[] = [
     title: 'We are not hiring you for an internship.',
     desc:
       "You are an expert who would help us. You're Reframing How employees grow. You're not here to complete tasks. You're here to design behavior — to choreograph how people reflect, grow, and change.",
-    img: '/Test1.png',
+    img: '/Test4.png',
     action: 'Learn more',
   },
   {
@@ -26,7 +26,7 @@ const keySections: KeySection[] = [
     title: 'Your education is your superpower',
     desc:
       "Whether you're trained in Fine Arts, Design, or Psychology — you have the potential inside you and you will discover it by the end of this round.",
-    img: '/Test2.png',
+    img: '/Test5.png',
     action: 'Discover more',
   },
   {
@@ -34,7 +34,7 @@ const keySections: KeySection[] = [
     title: "This round isn't a job test.",
     desc:
       "It's your first Behavioral Lab. Let's see how you blend empathy with design — and make systems feel human again.",
-    img: '/herocar1.2.png',
+    img: '/Test6.png',
     action: 'Explore more',
   },
 ];

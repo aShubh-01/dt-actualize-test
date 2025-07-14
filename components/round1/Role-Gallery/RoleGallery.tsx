@@ -147,7 +147,7 @@ export default function RoleGallerySection() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {roles.slice(0, visibleCount).map((role, index) => (
             <motion.div
               key={role._id}
@@ -182,14 +182,14 @@ export default function RoleGallerySection() {
                   className="w-full h-48 object-cover rounded-xl"
                 />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">
                 {role.roleTitle}
               </h3>
-              <p className="text-sm text-gray-700 mb-4">
+              {/* <p className="text-sm text-gray-700 mb-4">
                 {role.roleDescription.split(' ').slice(0, 6).join(' ')}...
-              </p>
+              </p> */}
 
-              <span className="inline-flex">
+              {/* <span className="inline-flex">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   onClick={(e) => {
@@ -200,7 +200,7 @@ export default function RoleGallerySection() {
                 >
                   Start Round 1
                 </motion.button>
-              </span>
+              </span> */}
             </motion.div>
           ))}
         </div>
