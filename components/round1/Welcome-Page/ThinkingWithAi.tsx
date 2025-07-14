@@ -66,7 +66,7 @@ const ThinkWithAI: FC = () => {
                   How you design not just screens, but decisions, emotions, and rituals
                 </li>
                 <li>
-                  How you blend AI, empathy, and psychological insight to move people — gently, yet powerfully
+                  How you blend AI, empathy, and psychological insight to move people  gently, yet powerfully
                 </li>
               </ul>
               <p>

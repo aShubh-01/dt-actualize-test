@@ -84,7 +84,7 @@ const DashboardSection = () => {
                 className="text-xl text-gray-700 leading-relaxed"
                 variants={fadeInUp}
               >
-                This is about shaping how companies make decisions — in real time.
+                This is about shaping how companies make decisions  in real time.
               </motion.p>
               
               <motion.div 

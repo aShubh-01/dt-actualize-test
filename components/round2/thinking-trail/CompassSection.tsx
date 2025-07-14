@@ -102,7 +102,7 @@ const CompassSection: React.FC<CompassSectionProps> = ({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
           >
-            <p>Read it like you would read a compass — not a grade.</p>
+            <p>Read it like you would read a compass  not a grade.</p>
           </motion.div>
           
           {/* Continue Button */}

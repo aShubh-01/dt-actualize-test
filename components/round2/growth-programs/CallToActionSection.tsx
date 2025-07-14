@@ -34,7 +34,7 @@ const CallToAction: React.FC = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: 0.4, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          If it's sharp — it could go live inside a company.
+          If it's sharp  it could go live inside a company.
         </motion.p>
 
         {/* Buttons Container */}

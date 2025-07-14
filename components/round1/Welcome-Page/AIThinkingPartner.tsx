@@ -22,7 +22,7 @@ const AIThinkingPartner: FC = () => {
             <div className="h-1 w-20 bg-blue-500 mb-6"></div>
             <div className="prose max-w-none">
               <p className="text-gray-600 mb-4">
-                You can — and should — use tools like UX Pilot to:
+                You can  and should  use tools like UX Pilot to:
               </p>
               <ul className="list-disc pl-5 mb-4 text-gray-600 space-y-2">
                 <li>Simulate user frustration</li>
@@ -39,10 +39,10 @@ const AIThinkingPartner: FC = () => {
               <ul className="list-disc pl-5 mb-4 text-gray-600 space-y-2">
                 <li>How you structure ambiguity</li>
                 <li>How you reframe a dull moment into an emotional one</li>
-                <li>How you hold space for the user's journey — and move them, without force</li>
+                <li>How you hold space for the user's journey  and move them, without force</li>
               </ul>
               <p className="text-gray-600 italic">
-                In short, we're not hiring a tool user. We're looking for a Behavioral Composer — someone who knows when to spark reflection and when to stay silent.
+                In short, we're not hiring a tool user. We're looking for a Behavioral Composer  someone who knows when to spark reflection and when to stay silent.
               </p>
             </div>
           </div>

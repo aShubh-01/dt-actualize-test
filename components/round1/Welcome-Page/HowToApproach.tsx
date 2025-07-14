@@ -5,7 +5,7 @@ import { CheckCircle } from 'lucide-react';
 
 export default function HowToApproach() {
   const points: string[] = [
-    "Read each scene as a real-world challenge. Imagine you're already on the team — how would you respond?",
+    "Read each scene as a real-world challenge. Imagine you're already on the team  how would you respond?",
     "Use AI to explore, not answer. Ask GPT to simulate founder feedback, user frustration, or alternate tones.",
     "Keep a second tab open for reflection. This round is not timed. Pause. Prompt. Think. Then write.",
   ];

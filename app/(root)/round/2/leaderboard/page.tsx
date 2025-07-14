@@ -58,7 +58,7 @@ export default function LeaderboardPage() {
       <section className="text-center mb-12">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">Leaderboard – Who Cracked It Best</h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          These architects didn't just think—they built systems that blend AI, empathy, and innovation for real impact.
+          These architects didn't just thinkthey built systems that blend AI, empathy, and innovation for real impact.
         </p>
       </section>
 

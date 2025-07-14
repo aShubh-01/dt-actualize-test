@@ -99,7 +99,7 @@ const ChallengeSection = () => {
                   </p>
                 </div>
                 <p className="text-gray-700 italic text-sm sm:text-base leading-relaxed">
-                  "The moment I stopped trying to meet expectations and started creating solutions no one had asked for yet — that's when doors really opened."
+                  "The moment I stopped trying to meet expectations and started creating solutions no one had asked for yet  that's when doors really opened."
                 </p>
               </motion.div>
               

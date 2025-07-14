@@ -30,7 +30,7 @@ const CorePhilosophy: React.FC = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            DT Fellows don't just analyze —{' '}
+            DT Fellows don't just analyze {' '}
             <motion.span 
               className="text-indigo-500"
               initial={{ opacity: 0, scale: 0.9 }}

@@ -71,7 +71,7 @@ const GrowthManifesto: React.FC<GrowthManifestoProps> = ({ onSubmit }) => {
             Your Growth Manifesto - Who Are You Becoming?
           </h1>
           <p className="text-gray-600 text-lg leading-relaxed max-w-xl mx-auto font-sans">
-            You've now walked through five real moments — not hypothetical cases, but 
+            You've now walked through five real moments  not hypothetical cases, but 
             reflections of what happens when systems meet people.
           </p>
         </div>

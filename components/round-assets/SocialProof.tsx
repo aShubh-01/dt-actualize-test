@@ -103,7 +103,7 @@ export default function SocialProof({ round }: { round: number }) {
           }`}
       >
         <p className="text-xl font-medium text-blue-700 p-6 rounded-lg bg-blue-50 border border-blue-100">
-          That tension you're feeling? It's what growing feels like — from task-doer to system builder.
+          That tension you're feeling? It's what growing feels like  from task-doer to system builder.
         </p>
       </div>
 

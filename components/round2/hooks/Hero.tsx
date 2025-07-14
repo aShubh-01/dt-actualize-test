@@ -88,7 +88,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ round }) => {
             variants={fadeInUp}
           >
             You've done assignments. You've followed instructions.
-            But somewhere deep down, you've asked yourself —
+            But somewhere deep down, you've asked yourself 
           </motion.p>
 
           <motion.p
